@@ -27,6 +27,7 @@ class RegisterActivity : AppCompatActivity() {
             val email = edtEmail.text.toString()
             val birthDay = editBirthday.text.toString()
             val tel = edtTel.text.toString()
+
             mRegisterPresenter.sendDataToServer(
                 this,
                 username,
@@ -36,7 +37,19 @@ class RegisterActivity : AppCompatActivity() {
                 email,
                 birthDay,
                 tel
-            )
+            ) { b, t ->
+                val ad: AlertDialog.Builder = AlertDialog.Builder(this)
+                ad.setTitle("Error! ")
+                ad.setIcon(android.R.drawable.btn_star_big_on)
+                ad.setPositiveButton("Close", null)
+                if (b) {
+                    ad.setMessage(t)
+                    ad.show()
+                } else {
+                    ad.setMessage(t)
+                    ad.show()
+                }
+            }
         }
     }
 

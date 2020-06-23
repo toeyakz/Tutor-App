@@ -17,6 +17,7 @@ import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 class RegisterPresenter {
+    @SuppressLint("CheckResult")
     fun sendDataToServer(
         context: Context,
         username: String,
@@ -25,7 +26,8 @@ class RegisterPresenter {
         lastName: String,
         email: String,
         birthDay: String,
-        tel: String
+        tel: String,
+        res: (Boolean, String) -> Unit
     ) {
         try {
 
@@ -46,7 +48,35 @@ class RegisterPresenter {
 
             Log.d("TAG", conTactArray[0].toString())
 
-            upload(root)
+            val rootToString: String = root.toString()
+            val body = RequestBody.create(
+                MediaType.parse("application/json; charset=utf-8"),
+                rootToString
+            )
+
+            DataModule.instance()!!.register(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object :
+                    DisposableObserver<RegisterResponse>() {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onNext(t: RegisterResponse) {
+                        if (t.isSuccessful) {
+                            res.invoke(true, t.message.toString())
+                        } else {
+                            res.invoke(false, t.message.toString())
+                        }
+                    }
+
+                    @SuppressLint("DefaultLocale")
+                    override fun onError(e: Throwable) {
+                        Log.d("TAG", e.message.toString() + "2")
+
+                    }
+                })
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -54,36 +84,4 @@ class RegisterPresenter {
 
     }
 
-    @SuppressLint("CheckResult")
-    private fun upload(root: JSONObject) {
-        val rootToString: String = root.toString()
-        val body = RequestBody.create(
-            MediaType.parse("application/json; charset=utf-8"),
-            rootToString
-        )
-
-        DataModule.instance()!!.register(body)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(object :
-                DisposableObserver<RegisterResponse>() {
-                override fun onComplete() {
-
-                }
-
-                override fun onNext(t: RegisterResponse) {
-                    if(t.isSuccessful){
-
-                    }else{
-
-                    }
-                }
-
-                @SuppressLint("DefaultLocale")
-                override fun onError(e: Throwable) {
-                    Log.d("TAG", e.message.toString() + "2")
-
-                }
-            })
-    }
 }
