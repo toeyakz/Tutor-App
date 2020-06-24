@@ -27,6 +27,7 @@ class RegisterPresenter {
         email: String,
         birthDay: String,
         tel: String,
+        radioValue: String,
         res: (Boolean, String) -> Unit
     ) {
         try {
@@ -42,11 +43,12 @@ class RegisterPresenter {
             contact.put("email", email)
             contact.put("birth_day", birthDay)
             contact.put("tel", tel)
+            contact.put("type", radioValue)
 
             conTactArray.put(0, contact)
             root.put("data", conTactArray)
 
-            Log.d("TAG", conTactArray[0].toString())
+            Log.d("RegisterPresenter", root.toString())
 
             val rootToString: String = root.toString()
             val body = RequestBody.create(
@@ -64,6 +66,7 @@ class RegisterPresenter {
                     }
 
                     override fun onNext(t: RegisterResponse) {
+                        Log.d("d7s2dfg9sf", t.isSuccessful.toString())
                         if (t.isSuccessful) {
                             res.invoke(true, t.message.toString())
                         } else {
@@ -73,7 +76,7 @@ class RegisterPresenter {
 
                     @SuppressLint("DefaultLocale")
                     override fun onError(e: Throwable) {
-                        Log.d("TAG", e.message.toString() + "2")
+                        Log.d("as98a6sasc", e.message.toString() + "2")
 
                     }
                 })

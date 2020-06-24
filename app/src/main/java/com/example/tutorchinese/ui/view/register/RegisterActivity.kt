@@ -1,13 +1,19 @@
 package com.example.tutorchinese.ui.view.register
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tutorchinese.R
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
+
     private lateinit var mRegisterPresenter: RegisterPresenter
+    private var radioValue: String = ""
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -36,15 +42,16 @@ class RegisterActivity : AppCompatActivity() {
                 lastName,
                 email,
                 birthDay,
-                tel
+                tel,
+                radioValue
             ) { b, t ->
                 val ad: AlertDialog.Builder = AlertDialog.Builder(this)
-                ad.setTitle("Error! ")
+                ad.setTitle("พบข้อมผิดพลาด! ")
                 ad.setIcon(android.R.drawable.btn_star_big_on)
-                ad.setPositiveButton("Close", null)
+                ad.setPositiveButton("ปิด", null)
                 if (b) {
-                    ad.setMessage(t)
-                    ad.show()
+                    Toast.makeText(this, t, Toast.LENGTH_SHORT).show()
+                    finish()
                 } else {
                     ad.setMessage(t)
                     ad.show()
@@ -56,27 +63,27 @@ class RegisterActivity : AppCompatActivity() {
     private fun checkIsEmpty() {
         // Dialog
         val ad: AlertDialog.Builder = AlertDialog.Builder(this)
-        ad.setTitle("Error! ")
+        ad.setTitle("พบข้อมผิดพลาด!")
         ad.setIcon(android.R.drawable.btn_star_big_on)
-        ad.setPositiveButton("Close", null)
+        ad.setPositiveButton("ปิด", null)
 
         // Check Username
         if (edtUsername.text.isEmpty()) {
-            ad.setMessage("Please input Username! ")
+            ad.setMessage("กรุณากรอกชื่อผู้ใช้")
             ad.show()
             edtUsername.requestFocus()
             return
         }
         // Check Password
         if (edtPassword.text.isEmpty()) {
-            ad.setMessage("Please input Password! ")
+            ad.setMessage("กรุณากรอกรหัสผ่าน")
             ad.show()
             edtPassword.requestFocus()
             return
         }
         // Check Name
         if (edtName.text.isEmpty()) {
-            ad.setMessage("Please input Name! ")
+            ad.setMessage("กรุณากรอกชื่อ")
             ad.show()
             edtName.requestFocus()
             return
@@ -84,7 +91,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // Check Email
         if (edtLastname.text.isEmpty()) {
-            ad.setMessage("Please input Last name! ")
+            ad.setMessage("กรุณากรอกนามสกุล")
             ad.show()
             edtLastname.requestFocus()
             return
@@ -92,7 +99,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // Check Email
         if (edtEmail.text.isEmpty()) {
-            ad.setMessage("Please input Email! ")
+            ad.setMessage("กรุณากรอกอีเมล์")
             ad.show()
             edtEmail.requestFocus()
             return
@@ -100,10 +107,24 @@ class RegisterActivity : AppCompatActivity() {
 
         // Check Tel
         if (edtTel.text.isEmpty()) {
-            ad.setMessage("Please input !Tel ")
+            ad.setMessage("กรุณากรอกเบอร์โทร")
             ad.show()
             edtTel.requestFocus()
             return
+        }
+
+        if (radioGroup.checkedRadioButtonId == -1) {
+            ad.setMessage("กรุณาเลือกประเภทก่อน")
+            ad.show()
+            radioGroup.requestFocus()
+            return
+        } else {
+            if (radioTutor.isChecked) {
+                radioValue = "tutor"
+            }
+            if (radioUser.isChecked) {
+                radioValue = "user"
+            }
         }
     }
 

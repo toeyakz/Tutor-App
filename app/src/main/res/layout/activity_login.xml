@@ -61,7 +61,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
                 android:padding="10dp"
-                android:text="Login"
+                android:text="ล็อคอิน"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +80,7 @@
                 android:drawableStart="@drawable/ic_person_black_24dp"
                 android:drawablePadding="5dp"
                 android:ems="10"
-                android:hint="Username"
+                android:hint="ชื่อผู้ใช้"
                 android:inputType="textPersonName"
                 android:padding="8dp"
                 android:textSize="14sp"
@@ -108,7 +108,7 @@
                     android:drawablePadding="5dp"
                     android:drawableTint="#9C9C9C"
                     android:ems="10"
-                    android:hint="Password"
+                    android:hint="รหัสผ่าน"
                     android:inputType="textPassword"
                     android:padding="8dp"
                     android:textSize="14sp"
@@ -137,7 +137,7 @@
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="14dp"
-                android:text="Login"
+                android:text="ล็อคอิน"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
@@ -148,10 +148,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="14dp"
                 android:layout_marginBottom="16dp"
-                android:text="Register"
+                android:text="สมัครสมาชิก"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -161,11 +161,12 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="or"
+                android:layout_marginTop="8dp"
+                android:text="หรือ"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

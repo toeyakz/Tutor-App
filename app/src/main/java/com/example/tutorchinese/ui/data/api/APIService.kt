@@ -1,5 +1,6 @@
 package com.example.tutorchinese.ui.data.api
 
+import com.example.tutorchinese.ui.data.response.LoginResponse
 import com.example.tutorchinese.ui.data.response.RegisterResponse
 import io.reactivex.Observable
 import okhttp3.RequestBody
@@ -32,8 +33,13 @@ interface APIService {
         @Field("serial") serial: String
     ): Observable<UserResponse>*/
 
-
     @FormUrlEncoded
-    @POST("api/login")
+    @POST("tutor/service.php?func=login")
+    fun login(
+        @Field("user") username: String,
+        @Field("pass") password: String
+    ): Observable<LoginResponse>
+
+    @POST("tutor/service.php?func=register")
     fun register(@Body body: RequestBody): Observable<RegisterResponse>
 }

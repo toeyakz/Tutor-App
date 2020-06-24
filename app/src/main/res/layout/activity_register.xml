@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context=".ui.view.register.RegisterActivity">
 
 
@@ -14,11 +15,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_login_form"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.493">
 
         <Button
             android:id="@+id/btnRegister2"
@@ -26,20 +28,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="14dp"
-            android:text="Register"
+            android:layout_marginBottom="16dp"
+            android:text="สมัครสมาชิก"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtTel" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Register"
+            android:text="สมัครสมาชิก"
             android:textColor="#222121"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -57,7 +60,7 @@
             android:background="@drawable/rounded_edittext"
             android:drawablePadding="5dp"
             android:ems="10"
-            android:hint="Username"
+            android:hint="ชื่อผู้ใช้"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textSize="14sp"
@@ -75,7 +78,7 @@
             android:background="@drawable/rounded_edittext"
             android:drawablePadding="5dp"
             android:ems="10"
-            android:hint="Password"
+            android:hint="รหัสผ่าน"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textSize="14sp"
@@ -94,7 +97,7 @@
             android:background="@drawable/rounded_edittext"
             android:drawablePadding="5dp"
             android:ems="10"
-            android:hint="Name"
+            android:hint="ชื่อ"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textSize="14sp"
@@ -113,7 +116,7 @@
             android:background="@drawable/rounded_edittext"
             android:drawablePadding="5dp"
             android:ems="10"
-            android:hint="Lastname"
+            android:hint="นามสกุล"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textSize="14sp"
@@ -132,7 +135,7 @@
             android:background="@drawable/rounded_edittext"
             android:drawablePadding="5dp"
             android:ems="10"
-            android:hint="Email"
+            android:hint="อีเมล์"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textSize="14sp"
@@ -151,7 +154,7 @@
             android:background="@drawable/rounded_edittext"
             android:drawablePadding="5dp"
             android:ems="10"
-            android:hint="Birthday"
+            android:hint="วันเกิด"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textSize="14sp"
@@ -170,19 +173,53 @@
             android:background="@drawable/rounded_edittext"
             android:drawablePadding="5dp"
             android:ems="10"
-            android:hint="Tel."
+            android:hint="เบอร์โทรศัพท์"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editBirthday" />
+            app:layout_constraintTop_toBottomOf="@+id/editBirthday"
+            tools:ignore="MissingConstraints" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            <RadioButton
+                android:id="@+id/radioTutor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ติวเตอร์" />
+
+            <RadioButton
+                android:id="@+id/radioUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ผู้ใช้งาน" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="ประเภท"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtTel" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
