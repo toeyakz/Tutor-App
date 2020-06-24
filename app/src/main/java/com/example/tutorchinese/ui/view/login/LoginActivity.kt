@@ -32,7 +32,24 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener {
-            checkIsEmpty()
+            val ad: AlertDialog.Builder = AlertDialog.Builder(this)
+            ad.setTitle("พบข้อมผิดพลาด!")
+            ad.setIcon(android.R.drawable.btn_star_big_on)
+            ad.setPositiveButton("ปิด", null)
+
+            if (edtUsername.text.isEmpty()) {
+                ad.setMessage("กรุณากรอกชื่อผู้ใช้")
+                ad.show()
+                edtUsername.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (edtPassword.text.isEmpty()) {
+                ad.setMessage("กรุณากรอกรหัสผ่าน")
+                ad.show()
+                edtPassword.requestFocus()
+                return@setOnClickListener
+            }
             mLoginPresenter.callLogin(
                 this,
                 edtUsername.text.toString(),
