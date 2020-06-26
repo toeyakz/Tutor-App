@@ -1,4 +1,4 @@
-package com.example.tutorchinese.ui.view.home
+package com.example.tutorchinese.ui.view.course
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

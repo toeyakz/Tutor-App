@@ -1,4 +1,4 @@
-package com.example.tutorchinese.ui.view.home
+package com.example.tutorchinese.ui.view.course
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,15 +6,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tutorchinese.R
+import com.example.tutorchinese.ui.data.entities.Course
 import com.example.tutorchinese.ui.data.response.CourseResponse
 import com.example.tutorchinese.ui.manage.PreferencesData
+import com.example.tutorchinese.ui.view.adpater.CourseAdapter
 import com.example.tutorchinese.ui.view.main.MainActivity
+import java.util.ArrayList
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class HomeFragment : Fragment() {
@@ -23,6 +26,8 @@ class HomeFragment : Fragment() {
     private var supportFragmentManager: FragmentManager? = null
     private var user: PreferencesData.Users? = null
     private lateinit var mHomePresenter: HomePresenter
+    private lateinit var rvCourse: RecyclerView
+    private lateinit var mCourseAdapter: CourseAdapter
 
 
     override fun onCreateView(
@@ -33,35 +38,37 @@ class HomeFragment : Fragment() {
         homeViewModel =
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        initView()
-       /* when (val type = user?.type) {
-            "user" -> {
-                val username = user?.U_username
-                textView.text = "ชื่อผู้ใช้: $username"
-                textView2.text = "ประเภทของผู้ใช้: $type"
-                textView3.text = "ล็อคอินสำเร็จ!"
-            }
-            "tutor" -> {
-                val username = user?.T_username
-                textView.text = "ชื่อผู้ใช้: $username"
-                textView2.text = "ประเภทของผู้ใช้: $type"
-                textView3.text = "ล็อคอินสำเร็จ!"
-            }
-            else -> {
-                val username = user?.admin_username
-                textView.text = "ชื่อผู้ใช้: $username"
-                textView2.text = "ประเภทของผู้ใช้: $type"
-                textView3.text = "ล็อคอินสำเร็จ!"
-            }
-        }*/
+        initView(root)
+        /* when (val type = user?.type) {
+             "user" -> {
+                 val username = user?.U_username
+                 textView.text = "ชื่อผู้ใช้: $username"
+                 textView2.text = "ประเภทของผู้ใช้: $type"
+                 textView3.text = "ล็อคอินสำเร็จ!"
+             }
+             "tutor" -> {
+                 val username = user?.T_username
+                 textView.text = "ชื่อผู้ใช้: $username"
+                 textView2.text = "ประเภทของผู้ใช้: $type"
+                 textView3.text = "ล็อคอินสำเร็จ!"
+             }
+             else -> {
+                 val username = user?.admin_username
+                 textView.text = "ชื่อผู้ใช้: $username"
+                 textView2.text = "ประเภทของผู้ใช้: $type"
+                 textView3.text = "ล็อคอินสำเร็จ!"
+             }
+         }*/
 
         return root
     }
 
-    private fun initView() {
+    private fun initView(root: View) {
         manageToolbar()
         mHomePresenter = HomePresenter()
         supportFragmentManager = activity!!.supportFragmentManager
+        rvCourse = root.findViewById(R.id.rvCourse)
+
 
         showCourse()
     }
@@ -86,6 +93,13 @@ class HomeFragment : Fragment() {
                     for (i in c.data!!) {
                         Log.d("8s1as96da", i.Cr_name)
                     }
+                    mCourseAdapter = CourseAdapter(activity!!, c.data as ArrayList<Course>)
+                    rvCourse.apply {
+                        layoutManager = LinearLayoutManager(activity)
+                        adapter = mCourseAdapter
+                        mCourseAdapter.notifyDataSetChanged()
+                    }
+
                 } else {
                     // กำหนด ui ให้โชว์หน้าว่าง
                 }
