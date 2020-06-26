@@ -27,7 +27,9 @@ class ProfilePresenter {
 
                 res.invoke(true)
             }
-            .setNegativeButton(R.string.cancel, null)
+            .setNegativeButton(R.string.cancel) { _, _ ->
+                res.invoke(false)
+            }
             .show()
     }
 

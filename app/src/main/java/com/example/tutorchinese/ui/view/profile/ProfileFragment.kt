@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.tutorchinese.R
+import com.example.tutorchinese.ui.manage.CustomProgressDialog
 import com.example.tutorchinese.ui.manage.PreferencesData
 import com.example.tutorchinese.ui.view.login.LoginActivity
 import com.example.tutorchinese.ui.view.main.MainActivity
@@ -21,6 +22,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private lateinit var notificationsViewModel: NotificationsViewModel
     private var user: PreferencesData.Users? = null
     private lateinit var mProfilePresenter: ProfilePresenter
+    private var dialog: CustomProgressDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,11 +62,20 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     override fun onClick(p0: View) {
         when (p0.id) {
             R.id.btnLogout -> {
+                dialog = CustomProgressDialog(activity!!, "กำลังโหลด..")
+                dialog?.show()
                 mProfilePresenter.logout(activity!!) {
                     if (it) {
+                        if (dialog?.isShowing!!) {
+                            dialog?.dismiss()
+                        }
                         val intent = Intent(activity, LoginActivity::class.java)
                         activity?.startActivity(intent)
                         activity?.finish()
+                    } else {
+                        if (dialog?.isShowing!!) {
+                            dialog?.dismiss()
+                        }
                     }
                 }
             }

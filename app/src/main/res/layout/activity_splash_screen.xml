@@ -25,6 +25,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo_app" />
 
+        <com.crystal.crystalpreloaders.widgets.CrystalPreloader
+            android:id="@+id/crystalPreloader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:crs_pl_bg_color="#fff"
+            app:crs_pl_fg_color="@color/colorPrimary"
+            app:crs_pl_size="very_small"
+            app:crs_pl_style="ball_pulse"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -32,19 +45,12 @@
             android:layout_marginTop="8dp"
             android:text="กำลังเชื่อมต่อ.."
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/crystalPreloader" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
