@@ -1,4 +1,4 @@
-package com.example.tutorchinese.ui.view.notifications
+package com.example.tutorchinese.ui.view.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

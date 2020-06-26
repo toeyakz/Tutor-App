@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.data.entities.User
+import com.example.tutorchinese.ui.manage.CustomProgressDialog
 import com.example.tutorchinese.ui.view.main.MainActivity
 import com.example.tutorchinese.ui.view.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_login.edtUsername
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var mLoginPresenter: LoginPresenter
+    private var dialog: CustomProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,12 +34,17 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener {
+            dialog = CustomProgressDialog(this, "กำลังโหลด..")
             val ad: AlertDialog.Builder = AlertDialog.Builder(this)
             ad.setTitle("พบข้อมผิดพลาด!")
             ad.setIcon(android.R.drawable.btn_star_big_on)
             ad.setPositiveButton("ปิด", null)
+            dialog?.show()
 
             if (edtUsername.text.isEmpty()) {
+                if (dialog?.isShowing!!) {
+                    dialog?.dismiss()
+                }
                 ad.setMessage("กรุณากรอกชื่อผู้ใช้")
                 ad.show()
                 edtUsername.requestFocus()
@@ -45,6 +52,9 @@ class LoginActivity : AppCompatActivity() {
             }
 
             if (edtPassword.text.isEmpty()) {
+                if (dialog?.isShowing!!) {
+                    dialog?.dismiss()
+                }
                 ad.setMessage("กรุณากรอกรหัสผ่าน")
                 ad.show()
                 edtPassword.requestFocus()
@@ -53,10 +63,11 @@ class LoginActivity : AppCompatActivity() {
             mLoginPresenter.callLogin(
                 this,
                 edtUsername.text.toString(),
-                edtPassword.text.toString(), object : LoginPresenter.View{
+                edtPassword.text.toString(), object : LoginPresenter.View {
                     override fun onSuccessService(user: List<User>?, type: String) {
                         when (type) {
                             "user" -> {
+                                mLoginPresenter.addDataUserToPrefs(applicationContext, user, type)
                                 val myIntent = Intent(applicationContext, MainActivity::class.java)
                                 myIntent.putExtra("username", user!![0].U_username)
                                 myIntent.putExtra("type", type)
@@ -64,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d("As6dasd", user[0].U_username)
                             }
                             "tutor" -> {
+                                mLoginPresenter.addDataTutorTioPrefs(applicationContext, user, type)
                                 val myIntent = Intent(applicationContext, MainActivity::class.java)
                                 myIntent.putExtra("username", user!![0].T_username)
                                 myIntent.putExtra("type", type)
@@ -71,6 +83,7 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d("As6dasd", user[0].T_username)
                             }
                             else -> {
+                                mLoginPresenter.addDataAdminToPrefs(applicationContext, user, type)
                                 val myIntent = Intent(applicationContext, MainActivity::class.java)
                                 myIntent.putExtra("username", user!![0].admin_username)
                                 myIntent.putExtra("type", type)
@@ -78,9 +91,15 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d("As6dasd", user[0].admin_username)
                             }
                         }
+                        if (dialog?.isShowing!!) {
+                            dialog?.dismiss()
+                        }
                     }
 
                     override fun onErrorService(error: String) {
+                        if (dialog?.isShowing!!) {
+                            dialog?.dismiss()
+                        }
                         val ad: AlertDialog.Builder = AlertDialog.Builder(this@LoginActivity)
                         ad.setTitle("พบข้อมผิดพลาด!")
                         ad.setIcon(android.R.drawable.btn_star_big_on)
@@ -88,6 +107,7 @@ class LoginActivity : AppCompatActivity() {
                         ad.setMessage(error)
                         ad.show()
                         Log.d("As6dasd", error)
+
                     }
                 }
             )

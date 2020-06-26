@@ -1,6 +1,7 @@
 package com.example.tutorchinese.ui.data.entities
 
 data class User (
+    val session: Boolean? = false,
     //user
     var U_id: Int? = null,
     var U_username: String? = null,

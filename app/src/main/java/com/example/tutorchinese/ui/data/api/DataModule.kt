@@ -14,8 +14,8 @@ class DataModule {
     companion object {
         private var retrofit: Retrofit? = null
         private var gson: Gson? = null
-        private const val BASE_URL = "http://192.168.1.7/"
-        //private const val BASE_URL = "http://10.255.252.44/"
+        //private const val BASE_URL = "http://192.168.1.7/"
+        private const val BASE_URL = "http://10.255.252.44/"
 
         @Synchronized
         private fun getInstance(): Retrofit? {
