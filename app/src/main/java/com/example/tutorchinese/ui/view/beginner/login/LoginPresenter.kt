@@ -1,4 +1,4 @@
-package com.example.tutorchinese.ui.view.login
+package com.example.tutorchinese.ui.view.beginner.login
 
 import android.annotation.SuppressLint
 import android.content.Context

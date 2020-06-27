@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.tutorchinese.ui.view.course.HomeFragment"
+        android:name="com.example.tutorchinese.ui.view.tutor.course.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.tutorchinese.ui.view.dashboard.DashboardFragment"
+        android:name="com.example.tutorchinese.ui.view.tutor.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard">
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.tutorchinese.ui.view.profile.ProfileFragment"
+        android:name="com.example.tutorchinese.ui.view.tutor.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
     </fragment>

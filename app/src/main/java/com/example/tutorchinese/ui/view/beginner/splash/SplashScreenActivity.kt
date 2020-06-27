@@ -1,4 +1,4 @@
-package com.example.tutorchinese.ui.view.splash
+package com.example.tutorchinese.ui.view.beginner.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.manage.PreferencesData
-import com.example.tutorchinese.ui.view.login.LoginActivity
-import com.example.tutorchinese.ui.view.main.MainActivity
+import com.example.tutorchinese.ui.view.beginner.login.LoginActivity
+import com.example.tutorchinese.ui.view.tutor.main.MainActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 

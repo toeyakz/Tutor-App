@@ -1,13 +1,9 @@
-package com.example.tutorchinese.ui.view.profile
+package com.example.tutorchinese.ui.view.tutor.profile
 
 import android.R
 import android.app.AlertDialog
-import android.app.PendingIntent.getActivity
 import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
 import android.content.SharedPreferences
-import android.os.Build
 import com.example.tutorchinese.ui.manage.Constants
 
 class ProfilePresenter {

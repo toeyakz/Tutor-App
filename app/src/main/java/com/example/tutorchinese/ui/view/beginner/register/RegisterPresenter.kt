@@ -1,11 +1,10 @@
-package com.example.tutorchinese.ui.view.register
+package com.example.tutorchinese.ui.view.beginner.register
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import com.example.tutorchinese.ui.data.api.DataModule
 import com.example.tutorchinese.ui.data.response.RegisterResponse
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
@@ -14,7 +13,6 @@ import okhttp3.RequestBody
 import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
-import java.util.concurrent.TimeUnit
 
 class RegisterPresenter {
     @SuppressLint("CheckResult")

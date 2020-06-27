@@ -1,4 +1,4 @@
-package com.example.tutorchinese.ui.view.main
+package com.example.tutorchinese.ui.view.tutor.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle

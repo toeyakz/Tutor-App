@@ -1,4 +1,4 @@
-package com.example.tutorchinese.ui.view.dashboard
+package com.example.tutorchinese.ui.view.tutor.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater

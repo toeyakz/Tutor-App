@@ -1,8 +1,7 @@
-package com.example.tutorchinese.ui.view.profile
+package com.example.tutorchinese.ui.view.tutor.profile
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.manage.CustomProgressDialog
 import com.example.tutorchinese.ui.manage.PreferencesData
-import com.example.tutorchinese.ui.view.login.LoginActivity
-import com.example.tutorchinese.ui.view.main.MainActivity
+import com.example.tutorchinese.ui.view.beginner.login.LoginActivity
+import com.example.tutorchinese.ui.view.tutor.main.MainActivity
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class ProfileFragment : Fragment(), View.OnClickListener {

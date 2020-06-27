@@ -1,4 +1,4 @@
-package com.example.tutorchinese.ui.view.course
+package com.example.tutorchinese.ui.view.tutor.course
 
 import android.annotation.SuppressLint
 import com.example.tutorchinese.ui.data.api.DataModule

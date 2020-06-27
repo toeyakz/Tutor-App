@@ -1,8 +1,6 @@
-package com.example.tutorchinese.ui.view.register
+package com.example.tutorchinese.ui.view.beginner.register
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity

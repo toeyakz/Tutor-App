@@ -1,4 +1,4 @@
-package com.example.tutorchinese.ui.view.profile
+package com.example.tutorchinese.ui.view.tutor.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.example.tutorchinese.ui.view.login
+package com.example.tutorchinese.ui.view.beginner.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,8 +8,8 @@ import androidx.appcompat.app.AlertDialog
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.data.entities.User
 import com.example.tutorchinese.ui.manage.CustomProgressDialog
-import com.example.tutorchinese.ui.view.main.MainActivity
-import com.example.tutorchinese.ui.view.register.RegisterActivity
+import com.example.tutorchinese.ui.view.tutor.main.MainActivity
+import com.example.tutorchinese.ui.view.beginner.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.edtPassword
 import kotlinx.android.synthetic.main.activity_login.edtUsername
