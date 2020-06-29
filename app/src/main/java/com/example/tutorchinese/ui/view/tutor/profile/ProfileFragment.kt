@@ -41,13 +41,13 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private fun initView(root: View) {
         mProfilePresenter = ProfilePresenter()
 
-        val textView: TextView = root.findViewById(R.id.text_notifications)
+       // val textView: TextView = root.findViewById(R.id.text_notifications)
         val logout: TextView = root.findViewById(R.id.btnLogout)
 
         logout.setOnClickListener(this)
 
         notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+           // textView.text = it
         })
     }
 

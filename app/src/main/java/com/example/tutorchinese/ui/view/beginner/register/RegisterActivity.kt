@@ -1,12 +1,19 @@
 package com.example.tutorchinese.ui.view.beginner.register
 
+import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.View
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.manage.CustomProgressDialog
 import kotlinx.android.synthetic.main.activity_register.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -19,10 +26,32 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         mRegisterPresenter = RegisterPresenter()
+        editBirthday.setSelection(editBirthday.text.length)
         actionOnClick()
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun actionOnClick() {
+
+        editBirthday.setOnClickListener{
+            val calendar = Calendar.getInstance(Locale.getDefault())
+            val datePickerDialog = DatePickerDialog(
+                this,
+                DatePickerDialog.OnDateSetListener { _: DatePicker?, i: Int, i1: Int, i2: Int ->
+                    val dateFormatter: DateFormat = SimpleDateFormat("dd-MMMM-yyyy")
+                    val newDate = Calendar.getInstance()
+                    newDate[i, i1] = i2
+                    editBirthday.setText(dateFormatter.format(newDate.time) )
+                    editBirthday.setSelection(editBirthday.text.length)
+                    if (editBirthday.text.toString().trim { it <= ' ' } != "") {
+                    }
+                },
+                calendar[Calendar.YEAR],
+                calendar[Calendar.MONTH],
+                calendar[Calendar.DAY_OF_MONTH]
+            )
+            datePickerDialog.show()
+        }
 
 
         btnRegister2.setOnClickListener {
