@@ -1,9 +1,6 @@
 package com.example.tutorchinese.ui.data.api
 
-import com.example.tutorchinese.ui.data.response.AddCourseResponse
-import com.example.tutorchinese.ui.data.response.CourseResponse
-import com.example.tutorchinese.ui.data.response.LoginResponse
-import com.example.tutorchinese.ui.data.response.RegisterResponse
+import com.example.tutorchinese.ui.data.response.*
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -34,6 +31,16 @@ interface APIService {
         @Field("pass") password: String,
         @Field("serial") serial: String
     ): Observable<UserResponse>*/
+
+    @POST("tutor/service.php?func=updateCourse")
+    fun updateCourse(@Body body: RequestBody): Observable<UpdateCourseResponse>
+
+    @FormUrlEncoded
+    @POST("tutor/service.php?func=deleteCourse")
+    fun deleteCourse(
+        @Field("tutor_id") tutor_id: String,
+        @Field("course_id") course_id: String
+    ): Observable<DeleteCourseResponse>
 
     @POST("tutor/service.php?func=addCourse")
     fun addCourse(@Body body: RequestBody): Observable<AddCourseResponse>

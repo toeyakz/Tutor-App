@@ -43,8 +43,8 @@ class AddCourseFragment : Fragment(), View.OnClickListener {
 
     override fun onPause() {
         super.onPause()
-        val nav = (activity as MainActivity).getNav()
-        nav.visibility = View.VISIBLE
+       /* val nav = (activity as MainActivity).getNav()
+        nav.visibility = View.VISIBLE*/
     }
 
     private fun initView(root: View) {
@@ -86,7 +86,7 @@ class AddCourseFragment : Fragment(), View.OnClickListener {
         val tvTitle = (activity as MainActivity).getTvTitle()
         val back = (activity as MainActivity).getBack()
         val nav = (activity as MainActivity).getNav()
-        nav.visibility = View.GONE
+        //nav.visibility = View.GONE
         tvTitle.text = "เพิ่มคอร์สเรียน"
         back.visibility = View.VISIBLE
 

@@ -1,16 +1,11 @@
 package com.example.tutorchinese.ui.view.adpater
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnLongClickListener
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tutorchinese.R
@@ -21,7 +16,8 @@ import java.util.*
 
 class CourseAdapter(
     val context: Context,
-    var item: ArrayList<Course>
+    var item: ArrayList<Course>,
+    private var mOnClickList: (HashMap<String, String>, Boolean) -> (Unit)
    // private val mCloseLoadPresenter: CloseLoadPresenter
 ) :
     RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
@@ -48,6 +44,28 @@ class CourseAdapter(
 
         holder.tvNameCourse.text = item[i].Cr_name
         holder.tvPriceCourse.text = item[i].Cr_price
+
+
+        holder.itemView.setOnClickListener {
+            val myMap = HashMap<String, String>()
+            myMap["Cr_id"] = item[i].Cr_id.toString()
+            myMap["Cr_name"] = item[i].Cr_name.toString()
+            myMap["Cr_price"] = item[i].Cr_price.toString()
+            myMap["Cr_info"] = item[i].Cr_info.toString()
+            myMap["Cr_data_time"] = item[i].Cr_data_time.toString()
+            mOnClickList.invoke(myMap, true)
+        }
+
+        holder.itemView.setOnLongClickListener {
+            val myMap = HashMap<String, String>()
+            myMap["Cr_id"] = item[i].Cr_id.toString()
+            myMap["Cr_name"] = item[i].Cr_name.toString()
+            myMap["Cr_price"] = item[i].Cr_price.toString()
+            myMap["Cr_info"] = item[i].Cr_info.toString()
+            myMap["Cr_data_time"] = item[i].Cr_data_time.toString()
+            mOnClickList.invoke(myMap, false)
+            true
+        }
 
     }
 

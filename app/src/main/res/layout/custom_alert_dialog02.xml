@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardBackgroundColor="#fff"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="28dp"
+            android:text="ลบข้อมูล"
+            android:textStyle="bold"
+            android:textColor="#3C3C3C"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/tvMessess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ต้องการลบข้อมูลคอร์สเรียนหรือไม่?"
+            android:textSize="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btnCancel"
+                android:textColor="@color/colorPrimary"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:paddingTop="12dp"
+                android:letterSpacing="0.025"
+                android:textStyle="bold"
+                android:paddingBottom="12dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="8dp"
+                android:text="ยกเลิก" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnConfirm"
+                style="@style/Widget.Tasker.RaisedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:text="ยืนยัน" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

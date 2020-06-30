@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -17,6 +18,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.data.entities.Course
 import com.example.tutorchinese.ui.data.response.CourseResponse
+import com.example.tutorchinese.ui.manage.CustomDialog
 import com.example.tutorchinese.ui.manage.NetworkConnectCheck
 import com.example.tutorchinese.ui.manage.PreferencesData
 import com.example.tutorchinese.ui.view.adpater.CourseAdapter
@@ -34,6 +36,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private lateinit var mHomePresenter: HomePresenter
     private lateinit var rvCourse: RecyclerView
     private lateinit var mCourseAdapter: CourseAdapter
+    private var mDialog = CustomDialog()
 
     //layout
     private lateinit var layoutNetworkError: ConstraintLayout
@@ -112,7 +115,89 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     if (c!!.isSuccessful) {
                         layoutNetworkError.visibility = View.GONE
                         rvCourse.visibility = View.VISIBLE
-                        mCourseAdapter = CourseAdapter(activity!!, c.data as ArrayList<Course>)
+                        mCourseAdapter =
+                            CourseAdapter(activity!!, c.data as ArrayList<Course>) { hashMap, b ->
+
+                                // On click
+                                if (b) {
+
+                                    // On long click
+                                } else {
+                                    mDialog.onDialog(activity!!, false, "เลือกการทำงาน") { s ->
+                                        //เลือก แก้ไข
+                                        if (s == "update") {
+                                            val myMap2 = HashMap<String, String>()
+                                            myMap2["Cr_id"] = hashMap["Cr_id"].toString()
+                                            myMap2["Cr_name"] = hashMap["Cr_name"].toString()
+                                            myMap2["Cr_price"] = hashMap["Cr_price"].toString()
+                                            myMap2["Cr_info"] = hashMap["Cr_info"].toString()
+                                            myMap2["Cr_data_time"] =
+                                                hashMap["Cr_data_time"].toString()
+
+                                            mDialog.dialogEditCourse(
+                                                activity!!,
+                                                "แก้ไขข้อมูล",
+                                                myMap2
+                                            ) { h ->
+                                                mHomePresenter.updateCourse(
+                                                    user?.T_id!!,
+                                                    h
+                                                ) { b, s ->
+                                                    if (b) {
+                                                        showCourse()
+                                                        Toast.makeText(
+                                                            activity,
+                                                            s,
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    } else {
+                                                        showCourse()
+                                                        Toast.makeText(
+                                                            activity,
+                                                            s,
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    }
+                                                }
+                                            }
+
+                                            //เลือก ลบ
+                                        } else {
+                                            mDialog.dialogQuestion(
+                                                activity!!,
+                                                false,
+                                                "ลบข้อมูล",
+                                                "ต้องการลบข้อมูลคอร์สเรียนหรือไม่?"
+                                            ) { d, a ->
+                                                if (d) {
+                                                    mHomePresenter.deleteCourse(
+                                                        user?.T_id,
+                                                        hashMap["Cr_id"]
+                                                    ) { boolean, string ->
+                                                        if (boolean) {
+                                                            showCourse()
+                                                            Toast.makeText(
+                                                                activity,
+                                                                string,
+                                                                Toast.LENGTH_SHORT
+                                                            ).show()
+                                                        } else {
+                                                            showCourse()
+                                                            Toast.makeText(
+                                                                activity,
+                                                                string,
+                                                                Toast.LENGTH_SHORT
+                                                            ).show()
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                }
+
+                            }
                         rvCourse.apply {
                             layoutManager = LinearLayoutManager(activity)
                             adapter = mCourseAdapter
@@ -145,7 +230,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
 
-
     override fun onClick(p0: View) {
         when (p0.id) {
             R.id.btnRefresh -> {
@@ -153,22 +237,22 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 //Toast.makeText(activity, "อิอิ", Toast.LENGTH_SHORT).show()
             }
             R.id.btnAddCourse -> {
-                    val addCourseFragment: AddCourseFragment? =
-                        activity!!.fragmentManager
-                            .findFragmentById(R.id.fragment_add_course) as AddCourseFragment?
+                val addCourseFragment: AddCourseFragment? =
+                    activity!!.fragmentManager
+                        .findFragmentById(R.id.fragment_add_course) as AddCourseFragment?
 
-                    if (addCourseFragment == null) {
-                        val newFragment = AddCourseFragment()
-                        fragmentManager!!.beginTransaction()
-                            .replace(R.id.navigation_view, newFragment, "")
-                            .addToBackStack(null)
-                            .commit()
-                    } else {
-                        fragmentManager!!.beginTransaction()
-                            .replace(R.id.navigation_view, addCourseFragment, "")
-                            .addToBackStack(null)
-                            .commit()
-                    }
+                if (addCourseFragment == null) {
+                    val newFragment = AddCourseFragment()
+                    fragmentManager!!.beginTransaction()
+                        .replace(R.id.navigation_view, newFragment, "")
+                        .addToBackStack(null)
+                        .commit()
+                } else {
+                    fragmentManager!!.beginTransaction()
+                        .replace(R.id.navigation_view, addCourseFragment, "")
+                        .addToBackStack(null)
+                        .commit()
+                }
 
             }
         }
