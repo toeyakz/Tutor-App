@@ -1,4 +1,4 @@
-package com.example.tutorchinese.ui.manage
+package com.example.tutorchinese.ui.controler
 
 class Constants{
     companion object {

@@ -3,13 +3,12 @@ package com.example.tutorchinese.ui.view.beginner.register
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.view.View
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tutorchinese.R
-import com.example.tutorchinese.ui.manage.CustomProgressDialog
+import com.example.tutorchinese.ui.controler.CustomProgressDialog
 import kotlinx.android.synthetic.main.activity_register.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat

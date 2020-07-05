@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.tutorchinese.R
-import com.example.tutorchinese.ui.manage.CustomProgressDialog
-import com.example.tutorchinese.ui.manage.PreferencesData
+import com.example.tutorchinese.ui.controler.CustomProgressDialog
+import com.example.tutorchinese.ui.controler.PreferencesData
 import com.example.tutorchinese.ui.view.beginner.login.LoginActivity
 import com.example.tutorchinese.ui.view.tutor.main.MainActivity
 

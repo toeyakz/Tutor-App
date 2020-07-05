@@ -10,19 +10,19 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.tutorchinese.R
+import com.example.tutorchinese.ui.controler.CustomDialog
+import com.example.tutorchinese.ui.controler.NetworkConnectCheck
+import com.example.tutorchinese.ui.controler.PreferencesData
 import com.example.tutorchinese.ui.data.entities.Course
 import com.example.tutorchinese.ui.data.response.CourseResponse
-import com.example.tutorchinese.ui.manage.CustomDialog
-import com.example.tutorchinese.ui.manage.NetworkConnectCheck
-import com.example.tutorchinese.ui.manage.PreferencesData
 import com.example.tutorchinese.ui.view.adpater.CourseAdapter
 import com.example.tutorchinese.ui.view.tutor.add_course.AddCourseFragment
+import com.example.tutorchinese.ui.view.tutor.course_detail.DetailCourseFragment
 import com.example.tutorchinese.ui.view.tutor.main.MainActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
@@ -70,6 +70,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         val btnRefresh: Button = root.findViewById(R.id.btnRefresh)
         val swipe: SwipeRefreshLayout = root.findViewById(R.id.swipe)
         val btnAddCourse: FloatingActionButton = root.findViewById(R.id.btnAddCourse)
+
 
         btnRefresh.setOnClickListener(this)
         btnAddCourse.setOnClickListener(this)
@@ -120,6 +121,31 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                                 // On click
                                 if (b) {
+
+                                    val bundle = Bundle()
+                                    bundle.putString("Cr_id", hashMap["Cr_id"].toString())
+                                    bundle.putString("Cr_name", hashMap["Cr_name"].toString())
+                                    bundle.putString("Cr_price", hashMap["Cr_price"].toString())
+                                    bundle.putString("Cr_info", hashMap["Cr_info"].toString())
+                                    bundle.putString("Cr_data_time",  hashMap["Cr_data_time"].toString())
+
+                                    val detailCourseFragment: DetailCourseFragment? =
+                                        activity!!.fragmentManager
+                                            .findFragmentById(R.id.fragment_add_course) as DetailCourseFragment?
+
+                                    if (detailCourseFragment == null) {
+                                        val newFragment = DetailCourseFragment()
+                                        newFragment.arguments = bundle
+                                        fragmentManager!!.beginTransaction()
+                                            .replace(R.id.navigation_view, newFragment, "")
+                                            .addToBackStack(null)
+                                            .commit()
+                                    } else {
+                                        fragmentManager!!.beginTransaction()
+                                            .replace(R.id.navigation_view, detailCourseFragment, "")
+                                            .addToBackStack(null)
+                                            .commit()
+                                    }
 
                                     // On long click
                                 } else {

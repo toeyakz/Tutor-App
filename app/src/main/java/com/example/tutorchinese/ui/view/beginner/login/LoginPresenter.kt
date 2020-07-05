@@ -7,7 +7,7 @@ import android.util.Log
 import com.example.tutorchinese.ui.data.api.DataModule
 import com.example.tutorchinese.ui.data.entities.User
 import com.example.tutorchinese.ui.data.response.LoginResponse
-import com.example.tutorchinese.ui.manage.Constants
+import com.example.tutorchinese.ui.controler.Constants
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers

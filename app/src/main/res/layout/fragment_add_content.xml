@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_add_course"
-    android:background="#fff"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.tutor.add_course.AddCourseFragment">
+    android:background="#fff"
+    android:id="@+id/fragment_add_content"
+    tools:context=".ui.view.tutor.add_content.AddContentFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/btnSaveCourse"
+            android:id="@+id/btnSaveContent"
             style="@style/Widget.Tasker.RaisedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -30,14 +30,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtCourseDetail" />
+            app:layout_constraintTop_toBottomOf="@+id/edtContentDetail" />
 
         <TextView
             android:id="@+id/tvCourseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="เพิ่มคอร์สเรียน"
+            android:text="เพิ่มบทเรียน"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="กรอกชื่อคอร์สเรียน :"
+            android:text="กรอกลำดับบทเรียน :"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCourseName" />
 
@@ -64,7 +64,7 @@
             android:layout_marginTop="8dp"
             android:text="กรอกรายละเอียด :"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtCoursePrice" />
+            app:layout_constraintTop_toBottomOf="@+id/edtContentName" />
 
         <TextView
             android:id="@+id/tvCourseDetails"
@@ -72,12 +72,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="กรอกราคา :"
+            android:text="กรอกชื่อบทเรียน :"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtCourseName" />
+            app:layout_constraintTop_toBottomOf="@+id/edtContentNumber" />
 
         <EditText
-            android:id="@+id/edtCourseName"
+            android:id="@+id/edtContentNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -86,16 +86,17 @@
             android:background="@drawable/rounded_edittext"
             android:drawablePadding="5dp"
             android:ems="10"
-            android:hint="ชื่อคอร์ส"
-            android:inputType="textPersonName"
+            android:hint="ลำดับบทเรียน"
+            android:inputType="number"
             android:padding="12dp"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <EditText
-            android:id="@+id/edtCourseDetail"
+            android:id="@+id/edtContentDetail"
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_marginStart="16dp"
@@ -114,7 +115,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
         <EditText
-            android:id="@+id/edtCoursePrice"
+            android:id="@+id/edtContentName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -123,7 +124,7 @@
             android:background="@drawable/rounded_edittext"
             android:drawablePadding="5dp"
             android:ems="10"
-            android:hint="ราคา"
+            android:hint="ชื่อบทเรียน"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textSize="14sp"
@@ -133,7 +134,5 @@
             app:layout_constraintTop_toBottomOf="@+id/tvCourseDetails" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

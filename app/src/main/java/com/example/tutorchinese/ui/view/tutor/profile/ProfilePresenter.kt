@@ -4,7 +4,7 @@ import android.R
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.tutorchinese.ui.manage.Constants
+import com.example.tutorchinese.ui.controler.Constants
 
 class ProfilePresenter {
     fun logout(activity: Context, res: (Boolean) -> Unit) {

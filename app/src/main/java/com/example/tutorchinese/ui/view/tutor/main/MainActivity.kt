@@ -6,12 +6,10 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.example.tutorchinese.R
-import com.example.tutorchinese.ui.manage.Constants.Companion.DASHBOARD
-import com.example.tutorchinese.ui.manage.Constants.Companion.HOME
-import com.example.tutorchinese.ui.manage.Constants.Companion.PROFILE
+import com.example.tutorchinese.ui.controler.Constants.Companion.DASHBOARD
+import com.example.tutorchinese.ui.controler.Constants.Companion.HOME
+import com.example.tutorchinese.ui.controler.Constants.Companion.PROFILE
 import com.example.tutorchinese.ui.view.tutor.course.HomeFragment
 import com.example.tutorchinese.ui.view.tutor.dashboard.DashboardFragment
 import com.example.tutorchinese.ui.view.tutor.profile.ProfileFragment

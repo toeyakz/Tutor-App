@@ -9,28 +9,24 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface APIService {
-    /*@FormUrlEncoded
-    @POST("services/toey_test.php?func=getInvoice")
-    fun getInvoice(
-        @Field("vehicle_id") vehicle_id: String
-    ): Observable<InvoiceResponse>*/
 
-    /*@FormUrlEncoded
-    @POST("api/login")
-    fun login(
-        @Field("user") username: String,
-        @Field("pass") password: String,
-        @Field("serial") serial: String
-    ): Observable<UserResponse>
-
+    @POST("tutor/service.php?func=updateConetnt")
+    fun updateContent(@Body body: RequestBody): Observable<UpdateContentResponse>
 
     @FormUrlEncoded
-    @POST("api/login")
-    fun logout(
-        @Field("user") username: String,
-        @Field("pass") password: String,
-        @Field("serial") serial: String
-    ): Observable<UserResponse>*/
+    @POST("tutor/service.php?func=deleteContent")
+    fun deleteContent(
+        @Field("content_id") content_id: String
+    ): Observable<DeleteContentResponse>
+
+    @POST("tutor/service.php?func=addContent")
+    fun addContent(@Body body: RequestBody): Observable<AddContentResponse>
+
+    @FormUrlEncoded
+    @POST("tutor/service.php?func=getContent")
+    fun getContent(
+        @Field("course_id") tutor_id: String
+    ): Observable<ContentResponse>
 
     @POST("tutor/service.php?func=updateCourse")
     fun updateCourse(@Body body: RequestBody): Observable<UpdateCourseResponse>

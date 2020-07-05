@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.tutorchinese.R
-import com.example.tutorchinese.ui.manage.PreferencesData
+import com.example.tutorchinese.ui.controler.PreferencesData
 import com.example.tutorchinese.ui.view.tutor.main.MainActivity
 
 class AddCourseFragment : Fragment(), View.OnClickListener {

@@ -1,9 +1,8 @@
-package com.example.tutorchinese.ui.manage
+package com.example.tutorchinese.ui.controler
 
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import com.example.tutorchinese.R
