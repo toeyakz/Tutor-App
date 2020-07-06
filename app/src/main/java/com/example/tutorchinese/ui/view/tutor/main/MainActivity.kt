@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.controler.Constants.Companion.DASHBOARD
@@ -74,6 +75,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onBackPressed() {
 
+        Log.d("asd5asda", supportFragmentManager.backStackEntryCount.toString())
+
         val isFragmentPopped = handleNestedFragmentBackStack(supportFragmentManager)
 
         if (!isFragmentPopped && supportFragmentManager.backStackEntryCount <= 1) {
@@ -96,12 +99,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     fragmentManager.backStackEntryCount > 1 -> {
                         fragmentManager.popBackStack()
                         Log.d("as8dasd", homeItem.itemId.toString())
-                        if(mSelectedItem == 99){
+                       /* if(mSelectedItem == 99){
+                            val newFragment = HomeFragment()
                             supportFragmentManager.beginTransaction()
-                                .replace(R.id.navigation_view, homeFragment!!, HOME)
+                                .replace(R.id.navigation_view, newFragment, HOME)
                                 .addToBackStack(null)
                                 .commit()
-                        }
+                        }*/
 
                         // Select home item
                         // navView!!.selectedItemId = homeItem.itemId
@@ -120,6 +124,14 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         when (p0.itemId) {
             R.id.navigation_home -> {
                 //  selectFragment(homeFragment!!)
+
+                val fm = supportFragmentManager
+                for (entry in 0 until fm.backStackEntryCount) {
+                    if(entry > 0){
+                        fm.popBackStack()
+                    }
+                }
+
                 mSelectedItem = 99
                 if (homeFragment == null) {
                     val newFragment = HomeFragment()
