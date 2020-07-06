@@ -36,6 +36,8 @@ class AddContentFragment : Fragment(), View.OnClickListener {
         return root
     }
 
+
+
     override fun onResume() {
         super.onResume()
         manageToolbar()
@@ -93,5 +95,7 @@ class AddContentFragment : Fragment(), View.OnClickListener {
             fragmentManager!!.popBackStack()
         }
     }
+
+
 
 }

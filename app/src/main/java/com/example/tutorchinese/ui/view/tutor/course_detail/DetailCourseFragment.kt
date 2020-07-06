@@ -23,6 +23,7 @@ import com.example.tutorchinese.ui.data.response.ContentResponse
 import com.example.tutorchinese.ui.data.response.CourseResponse
 import com.example.tutorchinese.ui.view.adpater.ContentAdapter
 import com.example.tutorchinese.ui.view.tutor.add_content.AddContentFragment
+import com.example.tutorchinese.ui.view.tutor.content_detail.DetailContentFragment
 import com.example.tutorchinese.ui.view.tutor.main.MainActivity
 import java.util.ArrayList
 import java.util.HashMap
@@ -91,6 +92,8 @@ class DetailCourseFragment : Fragment() {
             showContent()
         }
         btnAddContent.setOnClickListener {
+
+            val name = "DetailCourseFragment"
             val bundle2 = Bundle()
             bundle2.putString("Cr_id", courseId)
 
@@ -103,14 +106,15 @@ class DetailCourseFragment : Fragment() {
                 newFragment.arguments = bundle2
                 fragmentManager!!.beginTransaction()
                     .replace(R.id.navigation_view, newFragment, "")
-                    .addToBackStack(null)
+                    .addToBackStack(name)
                     .commit()
             } else {
                 fragmentManager!!.beginTransaction()
                     .replace(R.id.navigation_view, addContentFragment, "")
-                    .addToBackStack(null)
+                    .addToBackStack(name)
                     .commit()
             }
+            fragmentManager!!.popBackStack(name, 0)
 
         }
 
@@ -149,6 +153,31 @@ class DetailCourseFragment : Fragment() {
                                 ) { hashMap, b ->
                                     // On click
                                     if (b) {
+
+                                        val bundle = Bundle()
+                                        bundle.putString("Co_id", hashMap["Co_id"].toString())
+                                        bundle.putString("Cr_id", hashMap["Cr_id"].toString())
+                                        bundle.putString("Co_name", hashMap["Co_name"].toString())
+                                        bundle.putString("Cr_info", hashMap["Co_info"].toString())
+                                        bundle.putString("Co_chapter_number",  hashMap["Co_chapter_number"].toString())
+
+                                        val detail: DetailContentFragment? =
+                                            activity!!.fragmentManager
+                                                .findFragmentById(R.id.fragment_detail_content) as DetailContentFragment?
+
+                                        if (detail == null) {
+                                            val newFragment = DetailContentFragment()
+                                            newFragment.arguments = bundle
+                                            fragmentManager!!.beginTransaction()
+                                                .replace(R.id.navigation_view, newFragment, "")
+                                                .addToBackStack(null)
+                                                .commit()
+                                        } else {
+                                            fragmentManager!!.beginTransaction()
+                                                .replace(R.id.navigation_view, detail, "")
+                                                .addToBackStack(null)
+                                                .commit()
+                                        }
 
                                         // On long click
                                     } else {
@@ -190,7 +219,6 @@ class DetailCourseFragment : Fragment() {
                                                         }
                                                     }
                                                 }
-
 
                                                 //เลือก ลบ
                                             } else {

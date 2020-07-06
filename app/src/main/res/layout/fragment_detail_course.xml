@@ -1,283 +1,585 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ECECEC"
     tools:context=".ui.view.tutor.course_detail.DetailCourseFragment">
 
-    <ImageView
-        android:id="@+id/linearLayout2"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal"
-        card_view:layout_constraintEnd_toEndOf="parent"
-        card_view:layout_constraintStart_toStartOf="parent"
-        card_view:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        card_view:cardBackgroundColor="#fff"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="0dp"
-        card_view:layout_constraintEnd_toEndOf="parent"
-        card_view:layout_constraintStart_toStartOf="parent"
-        card_view:layout_constraintTop_toTopOf="parent">
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <TextView
-                android:id="@+id/tvCourseName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="คอร์สเรียนภาษาจีนสำหรับเด็ก"
-                android:textColor="@color/colorPrimary"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView19"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="รายละเอียด :"
-                        android:textColor="#2B2B2B"
-                        android:textSize="16dp" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvCourseDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="ราคานี้ ถึง 31 ก.ค. เรียนภาษาจีนส่วนตัว ให้บรรลุเป้าหมายอย่างรวดเร็ว e.g เตรียมสอบHSK,ฝึกพูดจีนให้คล่องแคล่ว, ปรับพื้นฐานภาษาจีนที่ถูกต้อง, สอบจีนให้ได้ที่ 1เรียนเดี่ยว 18,500 บาทต่อ 24 ช.ม.เรียนเป็นกลุ่ม เพิ่มท่านละ 2,500 บาท"
-                    android:textColor="#2B2B2B"
-                    android:textSize="16dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView120"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="ราคา :"
-                        android:textColor="#2B2B2B"
-                        android:textSize="16dp" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvCoursePrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="2,500 บาท"
-                    android:textColor="#2B2B2B"
-                    android:textSize="16dp" />
-            </LinearLayout>
-
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-
-    <LinearLayout
-        android:id="@+id/btnAddContent"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/raduis"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:gravity="center"
-        android:orientation="horizontal"
-        card_view:layout_constraintEnd_toEndOf="parent"
-        card_view:layout_constraintStart_toStartOf="parent"
-        card_view:layout_constraintTop_toBottomOf="@+id/cardView2">
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_outline_add_24" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="เพิ่มบทเรียน"
-            android:textColor="#fff"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        card_view:cardBackgroundColor="#FFFFFF"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="0dp"
-        card_view:layout_constraintBottom_toBottomOf="parent"
-        card_view:layout_constraintEnd_toEndOf="parent"
-        card_view:layout_constraintStart_toStartOf="parent"
-        card_view:layout_constraintTop_toBottomOf="@+id/btnAddContent">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/colorPrimary"
+                    android:orientation="horizontal" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    card_view:cardBackgroundColor="#fff"
+                    card_view:cardCornerRadius="5dp"
+                    card_view:cardElevation="0dp"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tvCourseName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="คอร์สเรียนภาษาจีนสำหรับเด็ก"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="110dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textView19"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:text="รายละเอียด :"
+                                    android:textColor="#2B2B2B"
+                                    android:textSize="16dp" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvCourseDetails"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="16dp"
+                                android:text="ราคานี้ ถึง 31 ก.ค. เรียนภาษาจีนส่วนตัว ให้บรรลุเป้าหมายอย่างรวดเร็ว e.g เตรียมสอบHSK,ฝึกพูดจีนให้คล่องแคล่ว, ปรับพื้นฐานภาษาจีนที่ถูกต้อง, สอบจีนให้ได้ที่ 1เรียนเดี่ยว 18,500 บาทต่อ 24 ช.ม.เรียนเป็นกลุ่ม เพิ่มท่านละ 2,500 บาท"
+                                android:textColor="#2B2B2B"
+                                android:textSize="16dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="110dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/textView120"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:text="ราคา :"
+                                    android:textColor="#2B2B2B"
+                                    android:textSize="16dp" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvCoursePrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="16dp"
+                                android:text="2,500 บาท"
+                                android:textColor="#2B2B2B"
+                                android:textSize="16dp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/btnAddContent"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/raduis"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="horizontal"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_outline_add_24" />
 
                 <TextView
-                    android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="บทเรียน"
-                    android:textColor="#595959"
-                    android:textStyle="bold"
-                    card_view:layout_constraintBottom_toBottomOf="parent"
-                    card_view:layout_constraintStart_toStartOf="parent"
-                    card_view:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginStart="8dp"
+                    android:text="เพิ่มบทเรียน"
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView3"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                card_view:cardBackgroundColor="#FFFFFF"
+                card_view:cardCornerRadius="5dp"
+                card_view:cardElevation="0dp"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/btnAddContent">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="bottom"
-                    android:background="#DDDDDD"
-                    card_view:layout_constraintBottom_toBottomOf="parent"
-                    card_view:layout_constraintEnd_toEndOf="parent"
-                    card_view:layout_constraintStart_toStartOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_content"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/not_found_content"
+                        android:id="@+id/constraintLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_height="45dp"
+                        android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
+                            android:id="@+id/textView13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="32dp"
-                            android:text="ไม่มีข้อมูลบทเรียน"
-                            card_view:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginStart="16dp"
+                            android:text="บทเรียน"
+                            android:textColor="#595959"
+                            android:textStyle="bold"
+                            card_view:layout_constraintBottom_toBottomOf="parent"
                             card_view:layout_constraintStart_toStartOf="parent"
                             card_view:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_gravity="bottom"
+                            android:background="#DDDDDD"
+                            card_view:layout_constraintBottom_toBottomOf="parent"
+                            card_view:layout_constraintEnd_toEndOf="parent"
+                            card_view:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                        android:id="@+id/swipe_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/not_found_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:visibility="gone"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="32dp"
+                                    android:text="ไม่มีข้อมูลบทเรียน"
+                                    card_view:layout_constraintEnd_toEndOf="parent"
+                                    card_view:layout_constraintStart_toStartOf="parent"
+                                    card_view:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.core.widget.NestedScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvContent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="500dp"
+                                    android:visibility="visible"
+                                    android:nestedScrollingEnabled="false"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:itemCount="5"
+                                    tools:listitem="@layout/layout_content_item" />
+                            </androidx.core.widget.NestedScrollView>
+
+                            <include
+                                layout="@layout/layout_network_error"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_margin="8dp"
+                                android:visibility="gone"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+        <!--<ImageView
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            card_view:cardBackgroundColor="#fff"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardElevation="0dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tvCourseName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="คอร์สเรียนภาษาจีนสำหรับเด็ก"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="รายละเอียด :"
+                            android:textColor="#2B2B2B"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvCourseDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="ราคานี้ ถึง 31 ก.ค. เรียนภาษาจีนส่วนตัว ให้บรรลุเป้าหมายอย่างรวดเร็ว e.g เตรียมสอบHSK,ฝึกพูดจีนให้คล่องแคล่ว, ปรับพื้นฐานภาษาจีนที่ถูกต้อง, สอบจีนให้ได้ที่ 1เรียนเดี่ยว 18,500 บาทต่อ 24 ช.ม.เรียนเป็นกลุ่ม เพิ่มท่านละ 2,500 บาท"
+                        android:textColor="#2B2B2B"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView120"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="ราคา :"
+                            android:textColor="#2B2B2B"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvCoursePrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="2,500 บาท"
+                        android:textColor="#2B2B2B"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <LinearLayout
+            android:id="@+id/btnAddContent"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/raduis"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="horizontal"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_outline_add_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="เพิ่มบทเรียน"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            card_view:cardBackgroundColor="#FFFFFF"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardElevation="0dp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/btnAddContent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="บทเรียน"
+                        android:textColor="#595959"
+                        android:textStyle="bold"
+                        card_view:layout_constraintBottom_toBottomOf="parent"
+                        card_view:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="bottom"
+                        android:background="#DDDDDD"
+                        card_view:layout_constraintBottom_toBottomOf="parent"
+                        card_view:layout_constraintEnd_toEndOf="parent"
+                        card_view:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/not_found_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="32dp"
+                                android:text="ไม่มีข้อมูลบทเรียน"
+                                card_view:layout_constraintEnd_toEndOf="parent"
+                                card_view:layout_constraintStart_toStartOf="parent"
+                                card_view:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:itemCount="5"
+                            tools:listitem="@layout/layout_content_item" />
+
+                        <include
+                            layout="@layout/layout_network_error"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvContent"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="visible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:itemCount="5"
-                        tools:listitem="@layout/layout_content_item" />
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-                    <include
-                        layout="@layout/layout_network_error"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_margin="8dp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>-->
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
