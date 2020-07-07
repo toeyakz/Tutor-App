@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private fun handleNestedFragmentBackStack(fragmentManager: FragmentManager): Boolean {
         val childFragmentList = fragmentManager.fragments
-        val homeItem: MenuItem = navView!!.menu.getItem(0)
+
         if (childFragmentList.size > 0) {
             for (index in childFragmentList.size - 1 downTo 0) {
                 val fragment = childFragmentList[index]
@@ -98,19 +98,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     isPopped -> true
                     fragmentManager.backStackEntryCount > 1 -> {
                         fragmentManager.popBackStack()
-                        Log.d("as8dasd", homeItem.itemId.toString())
-                       /* if(mSelectedItem == 99){
-                            val newFragment = HomeFragment()
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.navigation_view, newFragment, HOME)
-                                .addToBackStack(null)
-                                .commit()
-                        }*/
-
-                        // Select home item
-                        // navView!!.selectedItemId = homeItem.itemId
-
-
                         true
                     }
                     else -> false
