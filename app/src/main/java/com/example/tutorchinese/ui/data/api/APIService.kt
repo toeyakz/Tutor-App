@@ -10,6 +10,17 @@ import retrofit2.http.POST
 
 interface APIService {
 
+    @POST("tutor/service.php?func=getCourseFromUser")
+    fun getCourseFromUser(): Observable<CourseFromUserResponse>
+
+    @FormUrlEncoded
+    @POST("tutor/service.php?func=getOrdersFromUser")
+    fun getOrdersFromUser(
+        @Field("user_id") user_id: String,
+        @Field("course_id") course_id: String
+
+    ): Observable<OrdersFromUserResponse>
+
     @POST("tutor/service.php?func=updateConetnt")
     fun updateContent(@Body body: RequestBody): Observable<UpdateContentResponse>
 
@@ -43,9 +54,10 @@ interface APIService {
 
     @FormUrlEncoded
     @POST("tutor/service.php?func=getCourse")
-    fun getCourse(
+    fun getCourseFromTuTor(
         @Field("tutor_id") tutor_id: String
     ): Observable<CourseResponse>
+
 
     @FormUrlEncoded
     @POST("tutor/service.php?func=login")

@@ -1,13 +1,10 @@
 package com.example.tutorchinese.ui.view.tutor.course
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
 import com.example.tutorchinese.ui.data.api.DataModule
-import com.example.tutorchinese.ui.data.response.CourseResponse
-import com.example.tutorchinese.ui.data.response.DeleteCourseResponse
-import com.example.tutorchinese.ui.data.response.RegisterResponse
-import com.example.tutorchinese.ui.data.response.UpdateCourseResponse
+import com.example.tutorchinese.ui.data.entities.CourseFromUser
+import com.example.tutorchinese.ui.data.response.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
@@ -18,15 +15,29 @@ import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
 class HomePresenter {
+
     interface Response {
-        fun value(c: CourseResponse?)
-        fun error(c: String?)
+        interface CourseTutor {
+            fun value(c: CourseResponse?)
+            fun error(c: String?)
+        }
+
+        interface CourseUser {
+            fun value(c: CourseFromUserResponse?)
+            fun error(c: String?)
+        }
+
+        interface OrdersUser {
+            fun value(c: OrdersFromUserResponse)
+            fun error(c: String?)
+        }
+
     }
 
     @SuppressLint("CheckResult")
-    fun courseData(id_: Int, res: Response) {
+    fun courseData(id_: Int, res: Response.CourseTutor) {
 
-        DataModule.instance()!!.getCourse(id_.toString())
+        DataModule.instance()!!.getCourseFromTuTor(id_.toString())
             .subscribeOn(Schedulers.io())
             .timeout(20, TimeUnit.SECONDS)
             .observeOn(AndroidSchedulers.mainThread())
@@ -42,6 +53,56 @@ class HomePresenter {
                     res.error(e.message!!)
                 }
             })
+    }
+
+    @SuppressLint("CheckResult")
+    fun getOrdersFromUser(user_id: String, course_id: String, res: Response.OrdersUser) {
+        try {
+            DataModule.instance()!!.getOrdersFromUser(user_id, course_id)
+                .subscribeOn(Schedulers.io())
+                .timeout(20, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableObserver<OrdersFromUserResponse>() {
+                    override fun onComplete() {
+                    }
+
+                    override fun onNext(t: OrdersFromUserResponse) {
+                        res.value(t)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        res.error(e.message!!)
+                    }
+                })
+        } catch (e: Exception) {
+            res.error(e.message!!)
+            e.printStackTrace()
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    fun getCourseFromUser(res: Response.CourseUser) {
+        try {
+            DataModule.instance()!!.getCourseFromUser()
+                .subscribeOn(Schedulers.io())
+                .timeout(20, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableObserver<CourseFromUserResponse>() {
+                    override fun onComplete() {
+                    }
+
+                    override fun onNext(t: CourseFromUserResponse) {
+                        res.value(t)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        res.error(e.message!!)
+                    }
+                })
+        } catch (e: Exception) {
+            res.error(e.message!!)
+            e.printStackTrace()
+        }
     }
 
     @SuppressLint("CheckResult")
@@ -71,7 +132,11 @@ class HomePresenter {
     }
 
     @SuppressLint("CheckResult")
-    fun updateCourse(tutor_id: Int, h: HashMap<String, String>, function: (Boolean, String) -> Unit) {
+    fun updateCourse(
+        tutor_id: Int,
+        h: HashMap<String, String>,
+        function: (Boolean, String) -> Unit
+    ) {
         try {
 
             val conTactArray = JSONArray()
@@ -120,7 +185,6 @@ class HomePresenter {
 
                     }
                 })
-
 
 
         } catch (e: Exception) {
