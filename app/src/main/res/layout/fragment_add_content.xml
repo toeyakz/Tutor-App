@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:id="@+id/fragment_add_content"
-    tools:context=".ui.view.tutor.add_content.AddContentFragment">
+    tools:context=".ui.view.course.add_content.AddContentFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

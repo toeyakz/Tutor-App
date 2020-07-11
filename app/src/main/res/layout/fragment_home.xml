@@ -6,7 +6,7 @@
     android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.tutor.course.HomeFragment">
+    tools:context=".ui.view.course.course_main.HomeFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe"

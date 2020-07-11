@@ -1,8 +1,8 @@
 package com.example.tutorchinese.ui.data.entities
 
 data class Course (
-    val Cr_id: Int?,
-    var T_id: Int? ,
+    var Cr_id: Int?,
+    var T_id: Int?,
     var Cr_name: String? = null,
     var Cr_info: String? = null,
     var Cr_price: String? = null,

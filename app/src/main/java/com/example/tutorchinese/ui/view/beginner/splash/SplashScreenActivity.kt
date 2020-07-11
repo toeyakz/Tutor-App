@@ -7,7 +7,7 @@ import android.os.Handler
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.controler.PreferencesData
 import com.example.tutorchinese.ui.view.beginner.login.LoginActivity
-import com.example.tutorchinese.ui.view.tutor.main.MainActivity
+import com.example.tutorchinese.ui.view.main.MainActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 

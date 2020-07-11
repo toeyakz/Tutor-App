@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ECECEC"
-    tools:context=".ui.view.tutor.course_detail.DetailCourseFragment">
+    tools:context=".ui.view.course.course_detail.DetailCourseFragment">
 
     <ScrollView
         android:layout_width="0dp"

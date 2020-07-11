@@ -62,4 +62,7 @@ dependencies {
     // Dotted Progress Bar
     implementation 'com.crystal:crystalpreloaders:1.0.0'
 
+    //gallery
+    implementation 'com.library.tangxiaolv:telegramgallery:1.0.5'
+
 }
