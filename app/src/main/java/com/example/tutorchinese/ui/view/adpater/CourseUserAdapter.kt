@@ -2,15 +2,23 @@ package com.example.tutorchinese.ui.view.adpater
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.data.entities.Course
 import com.example.tutorchinese.ui.data.entities.CourseFromUser
+import com.example.tutorchinese.ui.data.response.BankDetailsResponse
+import com.example.tutorchinese.ui.data.response.CourseResponse
+import com.example.tutorchinese.ui.data.response.OrdersFromUserResponse
+import com.example.tutorchinese.ui.view.course.course_main.HomePresenter
+import com.example.tutorchinese.ui.view.payment.PaymentInformationFragment
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,8 +26,10 @@ import java.util.*
 class CourseUserAdapter(
     val context: Context,
     var item: ArrayList<CourseFromUser>,
-    private var mOnClickList: (HashMap<String, String>) -> (Unit)
-   // private val mCloseLoadPresenter: CloseLoadPresenter
+    var user_id: String,
+    val mHomePresenter: HomePresenter,
+    private var mOnClickList: (HashMap<String, String>, String) -> (Unit)
+    // private val mCloseLoadPresenter: CloseLoadPresenter
 ) :
     RecyclerView.Adapter<CourseUserAdapter.ViewHolder>() {
 
@@ -46,15 +56,44 @@ class CourseUserAdapter(
         holder.tvNameCourse.text = item[i].Cr_name
         holder.tvNameTutor.text = item[i].T_name
 
+        val myMap = HashMap<String, String>()
+        myMap["Cr_id"] = item[i].Cr_id.toString()
+        myMap["Cr_name"] = item[i].Cr_name.toString()
+        myMap["T_id"] = item[i].T_id.toString()
+        myMap["T_name"] = item[i].T_name.toString()
 
-        holder.itemView.setOnClickListener {
-            val myMap = HashMap<String, String>()
-            myMap["Cr_id"] = item[i].Cr_id.toString()
-            myMap["Cr_name"] = item[i].Cr_name.toString()
-            myMap["T_id"] = item[i].T_id.toString()
-            myMap["T_name"] = item[i].T_name.toString()
-            mOnClickList.invoke(myMap)
-        }
+        mHomePresenter.getOrdersFromUser(
+            user_id,
+            item[i].Cr_id.toString(),
+            object : HomePresenter.Response.OrdersUser {
+                override fun value(c: OrdersFromUserResponse) {
+                    //ซื้อแล้ว
+                    if (c.isSuccessful) {
+                        holder.tvStatus.text = "ซื้อแล้ว"
+                        holder.itemView.setOnClickListener {
+                            mOnClickList.invoke(myMap, "ซื้อแล้ว")
+                        }
+
+                        //ยังไม่ซื้อ
+                    } else {
+                        holder.tvStatus.text = "ยังไม่ซื้อ"
+                        holder.tvStatus.setTextColor(Color.parseColor("#D32F2F"))
+                        holder.itemView.setOnClickListener {
+                            mOnClickList.invoke(myMap, "ยังไม่ซื้อ")
+                        }
+
+
+                        //  mDialog.dialogDetailCourse(activity!!, "รายละเอียดคอร์ส",c.data[0].Cr_id.toString())
+                    }
+
+                }
+
+                override fun error(c: String?) {
+
+                }
+
+            })
+
 
         /*holder.itemView.setOnLongClickListener {
             val myMap = HashMap<String, String>()
@@ -72,6 +111,7 @@ class CourseUserAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvNameCourse: TextView = itemView.findViewById(R.id.tvNameCourse)
         var tvNameTutor: TextView = itemView.findViewById(R.id.tvNameTutor)
+        var tvStatus: TextView = itemView.findViewById(R.id.tvStatus)
 
     }
 

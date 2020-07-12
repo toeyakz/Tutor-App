@@ -178,6 +178,7 @@ class CustomDialog {
         mDialogView.tvTitle.text = title
 
         //set data
+        mDialogView.tvCourseName.text = course.Cr_name
         mDialogView.tvDetails.text = "\t\t\t\t" + course.Cr_info
         mDialogView.tvpPrice.text = "ราคา : " + course.Cr_price
 

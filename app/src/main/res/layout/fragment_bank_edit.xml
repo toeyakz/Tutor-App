@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_bank_add"
+    android:id="@+id/fragment_bank_edit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.view.bank.BankAddFragment">
@@ -21,21 +21,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="เพิ่มข้อมูลบัญชี"
+                android:text="แก้ไขข้อมูลบัญชี"
                 android:textColor="@color/colorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/addImageQRCode"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_gravity="center"
-                android:layout_margin="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:src="@drawable/add_image" />
+                <ImageView
+                    android:id="@+id/addImageQRCode"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_margin="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/add_image" />
+
+                <ImageView
+                    android:id="@+id/imageQRCode"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_margin="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:src="@drawable/add_image" />
+
+
+
 
             <TextView
                 android:id="@+id/textView7"
@@ -43,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="กรอกชื่อธนาคาร :" />
+                android:text="แก้ไขชื่อธนาคาร :" />
 
             <EditText
                 android:id="@+id/edtBankName"
@@ -66,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="กรอกเลขบัญชี :" />
+                android:text="แก้ไขเลขบัญชี :" />
 
             <EditText
                 android:id="@+id/edtBankNumber"
@@ -89,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="กรอกชื่อบัญชี :" />
+                android:text="แก้ไขชื่อบัญชี :" />
 
             <EditText
                 android:id="@+id/edtAccountName"

@@ -21,6 +21,7 @@ import com.example.tutorchinese.ui.controler.NetworkConnectCheck
 import com.example.tutorchinese.ui.controler.PreferencesData
 import com.example.tutorchinese.ui.data.entities.Course
 import com.example.tutorchinese.ui.data.entities.CourseFromUser
+import com.example.tutorchinese.ui.data.response.BankDetailsResponse
 import com.example.tutorchinese.ui.data.response.CourseFromUserResponse
 import com.example.tutorchinese.ui.data.response.CourseResponse
 import com.example.tutorchinese.ui.data.response.OrdersFromUserResponse
@@ -29,6 +30,7 @@ import com.example.tutorchinese.ui.view.adpater.CourseUserAdapter
 import com.example.tutorchinese.ui.view.course.add_course.AddCourseFragment
 import com.example.tutorchinese.ui.view.course.course_detail.DetailCourseFragment
 import com.example.tutorchinese.ui.view.main.MainActivity
+import com.example.tutorchinese.ui.view.payment.PaymentInformationFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
@@ -119,10 +121,140 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                                 mCourseUserAdapter = CourseUserAdapter(
                                     activity!!,
-                                    c.data as ArrayList<CourseFromUser>
-                                ) { hashMap ->
+                                    c.data as ArrayList<CourseFromUser>,
+                                    user?.U_id.toString(),
+                                    mHomePresenter
+                                ) { hashMap, s ->
 
-                                    mHomePresenter.getOrdersFromUser(
+                                    if(s == "ซื้อแล้ว"){
+                                        Toast.makeText(activity, "ซื้อแล้วจ้า", Toast.LENGTH_SHORT).show()
+                                    }else{
+                                        mHomePresenter.getCourseDetailFromUser(
+                                            hashMap["Cr_id"].toString(),
+                                            object :
+                                                HomePresenter.Response.CourseTutor {
+                                                override fun value(c: CourseResponse?) {
+
+                                                    if (c!!.isSuccessful) {
+
+                                                        val course = Course(
+                                                            c.data!![0].Cr_id,
+                                                            c.data[0].T_id,
+                                                            c.data[0].Cr_name.toString(),
+                                                            c.data[0].Cr_info.toString(),
+                                                            c.data[0].Cr_price.toString(),
+                                                            c.data[0].Cr_data_time.toString()
+                                                        )
+
+                                                        mDialog.dialogDetailCourse(
+                                                            activity!!,
+                                                            "รายละเอียดคอร์ส",
+                                                            course
+                                                        ) {
+                                                            if (it) {
+
+                                                                mHomePresenter.getBankDetail(
+                                                                    c.data[0].T_id.toString(),
+                                                                    object :
+                                                                        HomePresenter.Response.BankDetail {
+                                                                        override fun value(
+                                                                            bank: BankDetailsResponse
+                                                                        ) {
+
+                                                                            val bundle =
+                                                                                Bundle()
+                                                                            bundle.putString(
+                                                                                "Cr_id",
+                                                                                c.data[0].Cr_id.toString()
+                                                                            )
+                                                                            bundle.putString(
+                                                                                "Cr_name",
+                                                                                c.data[0].Cr_name.toString()
+                                                                            )
+                                                                            bundle.putString(
+                                                                                "Cr_price",
+                                                                                c.data[0].Cr_price.toString()
+                                                                            )
+                                                                            bundle.putString(
+                                                                                "bank_id",
+                                                                                bank.data!![0].bank_id.toString()
+                                                                            )
+                                                                            bundle.putString(
+                                                                                "T_id",
+                                                                                bank.data[0].T_id.toString()
+                                                                            )
+                                                                            bundle.putString(
+                                                                                "bank_name",
+                                                                                bank.data[0].bank_name.toString()
+                                                                            )
+                                                                            bundle.putString(
+                                                                                "bank_number",
+                                                                                bank.data[0].bank_number.toString()
+                                                                            )
+                                                                            bundle.putString(
+                                                                                "bank_name_account",
+                                                                                bank.data[0].bank_name_account.toString()
+                                                                            )
+                                                                            bundle.putString(
+                                                                                "bank_qr",
+                                                                                bank.data[0].bank_qr.toString()
+                                                                            )
+
+                                                                            val paymentInformationFragment: PaymentInformationFragment? =
+                                                                                activity!!.fragmentManager
+                                                                                    .findFragmentById(
+                                                                                        R.id.fragment_payment_information
+                                                                                    ) as PaymentInformationFragment?
+
+                                                                            if (paymentInformationFragment == null) {
+                                                                                val newFragment =
+                                                                                    PaymentInformationFragment()
+                                                                                newFragment.arguments =
+                                                                                    bundle
+                                                                                fragmentManager!!.beginTransaction()
+                                                                                    .replace(
+                                                                                        R.id.navigation_view,
+                                                                                        newFragment,
+                                                                                        ""
+                                                                                    )
+                                                                                    .addToBackStack(
+                                                                                        null
+                                                                                    )
+                                                                                    .commit()
+                                                                            } else {
+                                                                                fragmentManager!!.beginTransaction()
+                                                                                    .replace(
+                                                                                        R.id.navigation_view,
+                                                                                        paymentInformationFragment,
+                                                                                        ""
+                                                                                    )
+                                                                                    .addToBackStack(
+                                                                                        null
+                                                                                    )
+                                                                                    .commit()
+                                                                            }
+                                                                        }
+
+                                                                        override fun error(
+                                                                            c: String?
+                                                                        ) {
+
+                                                                        }
+                                                                    })
+                                                            }
+                                                        }
+                                                    }
+
+
+                                                }
+
+                                                override fun error(c: String?) {
+
+                                                }
+                                            })
+                                    }
+
+                                 /*   mHomePresenter.getOrdersFromUser(
                                         user?.U_id.toString(),
                                         hashMap["Cr_id"].toString(),
                                         object : HomePresenter.Response.OrdersUser {
@@ -159,9 +291,97 @@ class HomeFragment : Fragment(), View.OnClickListener {
                                                                         activity!!,
                                                                         "รายละเอียดคอร์ส",
                                                                         course
-                                                                    ){
-                                                                        if(it){
+                                                                    ) {
+                                                                        if (it) {
 
+                                                                            mHomePresenter.getBankDetail(
+                                                                                c.data[0].T_id.toString(),
+                                                                                object :
+                                                                                    HomePresenter.Response.BankDetail {
+                                                                                    override fun value(
+                                                                                        bank: BankDetailsResponse
+                                                                                    ) {
+
+                                                                                        val bundle =
+                                                                                            Bundle()
+                                                                                        bundle.putString(
+                                                                                            "Cr_id",
+                                                                                            c.data[0].Cr_id.toString()
+                                                                                        )
+                                                                                        bundle.putString(
+                                                                                            "Cr_name",
+                                                                                            c.data[0].Cr_name.toString()
+                                                                                        )
+                                                                                        bundle.putString(
+                                                                                            "Cr_price",
+                                                                                            c.data[0].Cr_price.toString()
+                                                                                        )
+                                                                                        bundle.putString(
+                                                                                            "bank_id",
+                                                                                            bank.data!![0].bank_id.toString()
+                                                                                        )
+                                                                                        bundle.putString(
+                                                                                            "T_id",
+                                                                                            bank.data[0].T_id.toString()
+                                                                                        )
+                                                                                        bundle.putString(
+                                                                                            "bank_name",
+                                                                                            bank.data[0].bank_name.toString()
+                                                                                        )
+                                                                                        bundle.putString(
+                                                                                            "bank_number",
+                                                                                            bank.data[0].bank_number.toString()
+                                                                                        )
+                                                                                        bundle.putString(
+                                                                                            "bank_name_account",
+                                                                                            bank.data[0].bank_name_account.toString()
+                                                                                        )
+                                                                                        bundle.putString(
+                                                                                            "bank_qr",
+                                                                                            bank.data[0].bank_qr.toString()
+                                                                                        )
+
+                                                                                        val paymentInformationFragment: PaymentInformationFragment? =
+                                                                                            activity!!.fragmentManager
+                                                                                                .findFragmentById(
+                                                                                                    R.id.fragment_payment_information
+                                                                                                ) as PaymentInformationFragment?
+
+                                                                                        if (paymentInformationFragment == null) {
+                                                                                            val newFragment =
+                                                                                                PaymentInformationFragment()
+                                                                                            newFragment.arguments =
+                                                                                                bundle
+                                                                                            fragmentManager!!.beginTransaction()
+                                                                                                .replace(
+                                                                                                    R.id.navigation_view,
+                                                                                                    newFragment,
+                                                                                                    ""
+                                                                                                )
+                                                                                                .addToBackStack(
+                                                                                                    null
+                                                                                                )
+                                                                                                .commit()
+                                                                                        } else {
+                                                                                            fragmentManager!!.beginTransaction()
+                                                                                                .replace(
+                                                                                                    R.id.navigation_view,
+                                                                                                    paymentInformationFragment,
+                                                                                                    ""
+                                                                                                )
+                                                                                                .addToBackStack(
+                                                                                                    null
+                                                                                                )
+                                                                                                .commit()
+                                                                                        }
+                                                                                    }
+
+                                                                                    override fun error(
+                                                                                        c: String?
+                                                                                    ) {
+
+                                                                                    }
+                                                                                })
                                                                         }
                                                                     }
                                                                 }
@@ -184,7 +404,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                                             }
 
-                                        })
+                                        })*/
 
 
                                 }

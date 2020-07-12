@@ -1,6 +1,7 @@
 package com.example.tutorchinese.ui.data.api
 
 import com.example.tutorchinese.ui.data.body.UploadImageBank
+import com.example.tutorchinese.ui.data.body.UploadImageEditBank
 import com.example.tutorchinese.ui.data.response.*
 import io.reactivex.Observable
 import okhttp3.RequestBody
@@ -10,6 +11,9 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface APIService {
+
+    @POST("tutor/service.php?func=setEditBankDetails")
+    fun setEditBankDetails(@Body body: UploadImageEditBank): Observable<ImageReturn>
 
     @POST("tutor/service.php?func=setBankDetails")
     fun upLoadImage(@Body body: UploadImageBank): Observable<ImageReturn>

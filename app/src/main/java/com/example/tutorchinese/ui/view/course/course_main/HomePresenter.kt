@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import com.example.tutorchinese.ui.data.api.DataModule
 import com.example.tutorchinese.ui.data.response.*
+import com.example.tutorchinese.ui.view.bank.BankPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
@@ -31,6 +32,31 @@ class HomePresenter {
             fun error(c: String?)
         }
 
+        interface BankDetail {
+            fun value(c: BankDetailsResponse)
+            fun error(c: String?)
+        }
+
+    }
+
+    @SuppressLint("CheckResult")
+    fun getBankDetail(tutor_id: String, response: Response.BankDetail) {
+        DataModule.instance()!!.getBankDetail(tutor_id)
+            .subscribeOn(Schedulers.io())
+            .timeout(20, TimeUnit.SECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object : DisposableObserver<BankDetailsResponse>() {
+                override fun onComplete() {
+                }
+
+                override fun onNext(t: BankDetailsResponse) {
+                    response.value(t)
+                }
+
+                override fun onError(e: Throwable) {
+                    response.error(e.message)
+                }
+            })
     }
 
     @SuppressLint("CheckResult")

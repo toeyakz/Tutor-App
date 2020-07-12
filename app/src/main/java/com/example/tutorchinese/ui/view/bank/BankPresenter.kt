@@ -8,6 +8,7 @@ import android.util.Log
 import com.example.tutorchinese.ui.controler.Utils
 import com.example.tutorchinese.ui.data.api.DataModule
 import com.example.tutorchinese.ui.data.body.UploadImageBank
+import com.example.tutorchinese.ui.data.body.UploadImageEditBank
 import com.example.tutorchinese.ui.data.response.BankDetailsResponse
 import com.example.tutorchinese.ui.data.response.ImageReturn
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -45,12 +46,108 @@ class BankPresenter {
     }
 
     @SuppressLint("CheckResult")
+    fun upLoadEditBankDetails(
+        T_id: String,
+        b_id: String,
+        image: String,
+        bankName: String,
+        bankNumber: String,
+        accountName: String,
+        res: (Boolean) -> Unit
+    ) {
+        val encodedImagePic1: String
+        val uploadImage = ArrayList<UploadImageEditBank.Data>()
+
+        if(image != ""){
+            val file = File(image)
+            if (file.absolutePath != "") {
+                val myBitmap = BitmapFactory.decodeFile(file.absolutePath)
+                Log.d("ASd6asd", file.absolutePath)
+                if (myBitmap != null) {
+                    Log.d("ASd6asd", myBitmap.toString())
+                    val byteArrayOutputStream =
+                        ByteArrayOutputStream()
+                    myBitmap.compress(
+                        Bitmap.CompressFormat.JPEG,
+                        70,
+                        byteArrayOutputStream
+                    )
+                    val byteArrayImage =
+                        byteArrayOutputStream.toByteArray()
+                    encodedImagePic1 = Base64.encodeToString(
+                        byteArrayImage,
+                        Base64.DEFAULT
+                    )
+
+                    val uploadData = UploadImageEditBank.Data(
+                        T_id,
+                        b_id,
+                        bankName,
+                        bankNumber,
+                        accountName,
+                        file.name,
+                        "data:image/jpeg;base64,$encodedImagePic1"
+                    )
+                    uploadImage.add(uploadData)
+                }
+            }
+        }else{
+            val uploadData = UploadImageEditBank.Data(
+                T_id,
+                b_id,
+                bankName,
+                bankNumber,
+                accountName,
+                "",
+                ""
+            )
+            uploadImage.add(uploadData)
+        }
+
+        val json: String = Utils().getGson()!!.toJson(uploadImage)
+        Log.d("a9a20as8da", json)
+
+        DataModule.instance()!!
+            .setEditBankDetails(UploadImageEditBank(uploadImage))
+            .subscribeOn(Schedulers.io())
+            .timeout(20, TimeUnit.SECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object : DisposableObserver<ImageReturn>() {
+                override fun onComplete() {
+
+                }
+
+                override fun onNext(t: ImageReturn) {
+                    if(t.isSuccessful){
+                        res.invoke(true)
+                        Log.d("As85das1d", t.message)
+                    }else{
+                        Log.d("As85das1d", t.message)
+                        res.invoke(false)
+                    }
+                }
+
+                @SuppressLint("DefaultLocale")
+                override fun onError(e: Throwable) {
+                    res.invoke(false)
+                    Log.d("As85das1d", e.message)
+                }
+            })
+
+
+
+
+
+    }
+
+    @SuppressLint("CheckResult")
     fun upLoadBankDetails(
-        T_id:String,
+        T_id: String,
         file: File,
         bankName: String,
         bankNumber: String,
-        accountName: String
+        accountName: String,
+        res: (Boolean) -> Unit
     ) {
         val encodedImagePic1: String
         val uploadImage = ArrayList<UploadImageBank.Data>()
@@ -84,33 +181,34 @@ class BankPresenter {
                 )
                 uploadImage.add(uploadData)
             }
-      /*      val json: String = Utils().getGson()!!.toJson(uploadImage)
+            /*      val json: String = Utils().getGson()!!.toJson(uploadImage)
             Log.d("a9a20as8da", json)*/
-
-            DataModule.instance()!!
-                .upLoadImage(UploadImageBank(uploadImage))
-                .subscribeOn(Schedulers.io())
-                .timeout(20, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableObserver<ImageReturn>() {
-                    override fun onComplete() {
-
-                    }
-
-                    override fun onNext(t: ImageReturn) {
-                       if(t.isSuccessful){
-                           Log.d("As85das1d", t.message)
-                       }
-                    }
-
-                    @SuppressLint("DefaultLocale")
-                    override fun onError(e: Throwable) {
-
-                    }
-                })
-
-
         }
+        DataModule.instance()!!
+            .upLoadImage(UploadImageBank(uploadImage))
+            .subscribeOn(Schedulers.io())
+            .timeout(20, TimeUnit.SECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object : DisposableObserver<ImageReturn>() {
+                override fun onComplete() {
+
+                }
+
+                override fun onNext(t: ImageReturn) {
+                    if (t.isSuccessful) {
+                        res.invoke(true)
+                        Log.d("As85das1d", t.message)
+                    } else {
+                        res.invoke(false)
+                    }
+                }
+
+                @SuppressLint("DefaultLocale")
+                override fun onError(e: Throwable) {
+                    res.invoke(false)
+                    Log.d("As85das1d", e.message)
+                }
+            })
 
 
     }

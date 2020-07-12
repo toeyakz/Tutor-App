@@ -15,11 +15,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.controler.PreferencesData
 import com.example.tutorchinese.ui.view.main.MainActivity
+import com.squareup.picasso.Picasso
 import java.io.File
+import java.lang.Exception
 
 
 class BankAddFragment : Fragment() {
@@ -86,7 +89,14 @@ class BankAddFragment : Fragment() {
                 edtBankName.text.toString(),
                 edtBankNumber.text.toString(),
                 edtAccountName.text.toString()
-            )
+            ){
+                if(it){
+                    fragmentManager!!.popBackStack()
+                    Toast.makeText(activity, "บันทึกข้อมูลบัญชีสำเร็จ!", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(activity, "พบข้อผิดพลาด!", Toast.LENGTH_SHORT).show()
+                }
+            }
          //   Log.d("As5da1sda", imageName)
         }
 
@@ -96,18 +106,29 @@ class BankAddFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         Log.d("As6dasd", "1")
         if (PICK_IMAGE == requestCode && resultCode == Activity.RESULT_OK) {
-            val pickedImage: Uri = data?.data!!
 
-            val filePath = arrayOf(MediaStore.Images.Media.DATA)
-            val cursor: Cursor =
-                activity!!.contentResolver.query(pickedImage, filePath, null, null, null)!!
-            cursor.moveToFirst()
-            val imagePath: String = cursor.getString(cursor.getColumnIndex(filePath[0]))
-            val options = BitmapFactory.Options()
-            options.inPreferredConfig = Bitmap.Config.ARGB_8888
-            val bitmap = BitmapFactory.decodeFile(imagePath, options)
-            imageName = File(imagePath)
-            addImageQRCode.setImageBitmap(bitmap)
+            try {
+                val pickedImage: Uri = data?.data!!
+
+                val filePath = arrayOf(MediaStore.Images.Media.DATA)
+                val cursor: Cursor =
+                    activity!!.contentResolver.query(pickedImage, filePath, null, null, null)!!
+                cursor.moveToFirst()
+                val imagePath: String = cursor.getString(cursor.getColumnIndex(filePath[0]))
+                val options = BitmapFactory.Options()
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888
+                val bitmap = BitmapFactory.decodeFile(imagePath, options)
+
+                Log.d("As5da1sda",File(imagePath).absolutePath )
+                imageName = File(imagePath)
+
+                Picasso.get().load(imageName).into(addImageQRCode)
+
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+
+           // addImageQRCode.setImageBitmap(bitmap)
 
 
         }

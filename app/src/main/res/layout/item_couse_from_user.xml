@@ -83,14 +83,38 @@
 
                         <TextView
                             android:id="@+id/tvNameTutor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:textColor="#9A9A9A"
+                            android:text="Annop Krainut" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/sd8sd185"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:textColor="#9A9A9A"
-                            android:text="Annop Krainut" />
+                            android:text="สถานะ: " />
+
+                        <TextView
+                            android:id="@+id/tvStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:textColor="#43A047"
+                            android:text="ซื้อแล้ว" />
+
                     </LinearLayout>
-
-
 
 
                 </LinearLayout>
