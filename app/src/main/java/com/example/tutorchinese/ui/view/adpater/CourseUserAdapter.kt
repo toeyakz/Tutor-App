@@ -69,21 +69,28 @@ class CourseUserAdapter(
                 override fun value(c: OrdersFromUserResponse) {
                     //ซื้อแล้ว
                     if (c.isSuccessful) {
-                        holder.tvStatus.text = "ซื้อแล้ว"
-                        holder.itemView.setOnClickListener {
-                            mOnClickList.invoke(myMap, "ซื้อแล้ว")
+                        if (c.data!!.isNotEmpty()) {
+                            if (c.data[0].O_status == 0) {
+                                holder.tvStatus.visibility = View.VISIBLE
+                                holder.tvStatus.text = "กำลังตรวจสอบ"
+                                holder.tvStatus.setTextColor(Color.parseColor("#FFF4511E"))
+                                holder.itemView.setOnClickListener {
+                                    mOnClickList.invoke(myMap, "กำลังตรวจสอบ")
+                                }
+                            } else if (c.data[0].O_status == 1) {
+                                holder.tvStatus.visibility = View.VISIBLE
+                                holder.tvStatus.text = "ซื้อแล้ว"
+                                holder.itemView.setOnClickListener {
+                                    mOnClickList.invoke(myMap, "ซื้อแล้ว")
+                                }
+                            }
                         }
-
                         //ยังไม่ซื้อ
                     } else {
-                        holder.tvStatus.text = "ยังไม่ซื้อ"
-                        holder.tvStatus.setTextColor(Color.parseColor("#D32F2F"))
+                        holder.tvStatus.visibility = View.GONE
                         holder.itemView.setOnClickListener {
                             mOnClickList.invoke(myMap, "ยังไม่ซื้อ")
                         }
-
-
-                        //  mDialog.dialogDetailCourse(activity!!, "รายละเอียดคอร์ส",c.data[0].Cr_id.toString())
                     }
 
                 }

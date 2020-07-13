@@ -62,9 +62,13 @@ dependencies {
     // Dotted Progress Bar
     implementation 'com.crystal:crystalpreloaders:1.0.0'
 
-    //gallery
+    // gallery
     implementation 'com.library.tangxiaolv:telegramgallery:1.0.5'
 
+    // picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // Dexter Permission Management
+    implementation 'com.karumi:dexter:6.0.2'
 
 }

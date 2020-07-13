@@ -90,8 +90,19 @@
                             android:textColor="#9A9A9A"
                             android:text="Annop Krainut" />
 
+                        <TextView
+                            android:id="@+id/tvStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:textColor="#43A047"
+                            android:visibility="gone"
+                            android:text="ซื้อแล้ว" />
+
                     </LinearLayout>
-                    <LinearLayout
+                   <!-- <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -103,6 +114,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:textColor="#9A9A9A"
+                            android:visibility="gone"
                             android:text="สถานะ: " />
 
                         <TextView
@@ -114,7 +126,7 @@
                             android:textColor="#43A047"
                             android:text="ซื้อแล้ว" />
 
-                    </LinearLayout>
+                    </LinearLayout>-->
 
 
                 </LinearLayout>
