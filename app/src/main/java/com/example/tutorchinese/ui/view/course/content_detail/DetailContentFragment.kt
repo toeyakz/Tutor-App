@@ -36,7 +36,7 @@ class DetailContentFragment : Fragment() {
         if (bundle != null) {
             tvContentNumber.text = "บทที่ : " + bundle.getString("Co_chapter_number")
             tvContentName.text = bundle.getString("Co_name")
-            tvContentDetails.text = bundle.getString("Cr_info")
+            tvContentDetails.text = "\t\t\t\t\tรายละเอียด: " + bundle.getString("Cr_info")
         }
     }
 

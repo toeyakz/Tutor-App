@@ -75,7 +75,7 @@ class DetailCourseFragment : Fragment() {
         val bundle = arguments
         if (bundle != null) {
             tvCourseName.text = bundle.getString("Cr_name")
-            tvCourseDetails.text = bundle.getString("Cr_info")
+            tvCourseDetails.text = "\t\t\t\t\t" + bundle.getString("Cr_info")
             tvCoursePrice.text = bundle.getString("Cr_price")
 
             courseId = bundle.getString("Cr_id").toString()
@@ -157,7 +157,10 @@ class DetailCourseFragment : Fragment() {
                                         bundle.putString("Cr_id", hashMap["Cr_id"].toString())
                                         bundle.putString("Co_name", hashMap["Co_name"].toString())
                                         bundle.putString("Cr_info", hashMap["Co_info"].toString())
-                                        bundle.putString("Co_chapter_number",  hashMap["Co_chapter_number"].toString())
+                                        bundle.putString(
+                                            "Co_chapter_number",
+                                            hashMap["Co_chapter_number"].toString()
+                                        )
 
                                         val detail: DetailContentFragment? =
                                             activity!!.fragmentManager

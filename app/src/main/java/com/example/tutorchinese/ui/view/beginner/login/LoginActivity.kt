@@ -72,6 +72,7 @@ class LoginActivity : AppCompatActivity() {
                                 myIntent.putExtra("username", user!![0].U_username)
                                 myIntent.putExtra("type", type)
                                 startActivity(myIntent)
+                                finish()
                                 Log.d("As6dasd", user[0].U_username)
                             }
                             "tutor" -> {
@@ -80,6 +81,7 @@ class LoginActivity : AppCompatActivity() {
                                 myIntent.putExtra("username", user!![0].T_username)
                                 myIntent.putExtra("type", type)
                                 startActivity(myIntent)
+                                finish()
                                 Log.d("As6dasd", user[0].T_username)
                             }
                             else -> {
@@ -88,6 +90,7 @@ class LoginActivity : AppCompatActivity() {
                                 myIntent.putExtra("username", user!![0].admin_username)
                                 myIntent.putExtra("type", type)
                                 startActivity(myIntent)
+                                finish()
                                 Log.d("As6dasd", user[0].admin_username)
                             }
                         }
