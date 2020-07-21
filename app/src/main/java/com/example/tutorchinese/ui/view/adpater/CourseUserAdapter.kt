@@ -114,6 +114,10 @@ class CourseUserAdapter(
         }*/
 
     }
+    fun filterList(list: ArrayList<CourseFromUser>) {
+        item = list
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvNameCourse: TextView = itemView.findViewById(R.id.tvNameCourse)

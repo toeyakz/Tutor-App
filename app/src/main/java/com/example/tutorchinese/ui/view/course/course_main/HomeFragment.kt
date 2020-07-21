@@ -2,12 +2,13 @@ package com.example.tutorchinese.ui.view.course.course_main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -46,10 +47,18 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private lateinit var mCourseUserAdapter: CourseUserAdapter
     private var mDialog = CustomDialog()
 
+    private val mCourseFromUserList = ArrayList<CourseFromUser>()
+
     //layout
     private lateinit var layoutNetworkError: ConstraintLayout
     private lateinit var swipe: SwipeRefreshLayout
+    private lateinit var frameLayout2: FrameLayout
 
+    //edit text
+    private lateinit var edtSearch: EditText
+
+    //image view
+    private lateinit var clearText: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,7 +74,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-
         manageToolbar()
         showCourse()
 
@@ -80,6 +88,9 @@ class HomeFragment : Fragment(), View.OnClickListener {
         val btnRefresh: Button = root.findViewById(R.id.btnRefresh)
         val swipe: SwipeRefreshLayout = root.findViewById(R.id.swipe)
         val btnAddCourse: FloatingActionButton = root.findViewById(R.id.btnAddCourse)
+         frameLayout2 = root.findViewById(R.id.frameLayout2)
+        edtSearch = root.findViewById(R.id.edtSearch)
+        clearText = root.findViewById(R.id.clearText)
 
 
         btnRefresh.setOnClickListener(this)
@@ -90,19 +101,38 @@ class HomeFragment : Fragment(), View.OnClickListener {
         when (user?.type) {
             "user" -> {
                 btnAddCourse.visibility = View.GONE
+                frameLayout2.visibility = View.VISIBLE
             }
             "tutor" -> {
                 btnAddCourse.visibility = View.VISIBLE
+                frameLayout2.visibility = View.GONE
             }
             else -> {
                 btnAddCourse.visibility = View.GONE
+                frameLayout2.visibility = View.GONE
             }
         }
+        initSearch()
 
         swipe.setOnRefreshListener {
             showCourse()
             swipe.isRefreshing = false
         }
+
+    }
+
+    private fun initSearch(){
+    }
+
+    private fun filters(toString: String, mCourseFromUserList : ArrayList<CourseFromUser>) {
+        val list = ArrayList<CourseFromUser>()
+
+        for (t in mCourseFromUserList) {
+            if (t.Cr_name?.toLowerCase()!!.contains(toString.toLowerCase())) {
+                list.add(t)
+            }
+        }
+        mCourseUserAdapter.filterList(list)
 
     }
 
@@ -118,6 +148,30 @@ class HomeFragment : Fragment(), View.OnClickListener {
                             if (c!!.isSuccessful) {
                                 layoutNetworkError.visibility = View.GONE
                                 rvCourse.visibility = View.VISIBLE
+
+                                clearText.setOnClickListener {
+                                    edtSearch.text.clear()
+                                }
+
+                                edtSearch.addTextChangedListener(object : TextWatcher {
+                                    override fun afterTextChanged(p0: Editable?) {
+                                        filters(p0.toString(), c.data as ArrayList<CourseFromUser>)
+
+                                        if (p0.toString().isEmpty()) {
+                                            clearText.visibility = View.GONE
+                                        } else {
+                                            clearText.visibility = View.VISIBLE
+                                        }
+                                    }
+
+                                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                                    }
+
+                                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                                    }
+                                })
+
+                             //   mCourseFromUserList.addAll()
 
                                 mCourseUserAdapter = CourseUserAdapter(
                                     activity!!,
