@@ -179,14 +179,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
                                     user?.U_id.toString(),
                                     mHomePresenter
                                 ) { hashMap, s ->
-                                    when (s) {
+                   /*                 when (s) {
                                         "ซื้อแล้ว" -> {
                                             Toast.makeText(activity, "ซื้อแล้วจ้า", Toast.LENGTH_SHORT).show()
                                         }
                                         "กำลังตรวจสอบ" -> {
                                             Toast.makeText(activity, "กำลังตรวจสอบการสั่งซื้อกรุณารอ", Toast.LENGTH_LONG).show()
                                         }
-                                        "ยังไม่ซื้อ" -> {
+                                        "ยังไม่ซื้อ" -> {*/
                                             mHomePresenter.getCourseDetailFromUser(
                                                 hashMap["Cr_id"].toString(),
                                                 object :
@@ -195,7 +195,64 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                                                         if (c!!.isSuccessful) {
 
-                                                            val course = Course(
+                                                            val bundle = Bundle()
+
+                                                            bundle.putString(
+                                                                "T_id",
+                                                                c.data!![0].T_id.toString()
+                                                            )
+                                                            bundle.putString(
+                                                                "Cr_id",
+                                                                c.data[0].Cr_id.toString()
+                                                            )
+                                                            bundle.putString(
+                                                                "Cr_name",
+                                                                c.data[0].Cr_name.toString()
+                                                            )
+                                                            bundle.putString(
+                                                                "Cr_price",
+                                                                c.data[0].Cr_price.toString()
+                                                            )
+                                                            bundle.putString(
+                                                                "Cr_info",
+                                                                c.data[0].Cr_info.toString()
+                                                            )
+                                                            bundle.putString(
+                                                                "Cr_data_time",
+                                                                c.data[0].Cr_data_time.toString()
+                                                            )
+                                                            bundle.putString(
+                                                                "status_price",
+                                                                s
+                                                            )
+
+                                                            val detailCourseFragment: DetailCourseFragment? =
+                                                                activity!!.fragmentManager
+                                                                    .findFragmentById(R.id.fragment_add_course) as DetailCourseFragment?
+
+                                                            if (detailCourseFragment == null) {
+                                                                val newFragment = DetailCourseFragment()
+                                                                newFragment.arguments = bundle
+                                                                fragmentManager!!.beginTransaction()
+                                                                    .replace(
+                                                                        R.id.navigation_view,
+                                                                        newFragment,
+                                                                        ""
+                                                                    )
+                                                                    .addToBackStack(null)
+                                                                    .commit()
+                                                            } else {
+                                                                fragmentManager!!.beginTransaction()
+                                                                    .replace(
+                                                                        R.id.navigation_view,
+                                                                        detailCourseFragment,
+                                                                        ""
+                                                                    )
+                                                                    .addToBackStack(null)
+                                                                    .commit()
+                                                            }
+
+                                                          /*  val course = Course(
                                                                 c.data!![0].Cr_id,
                                                                 c.data[0].T_id,
                                                                 c.data[0].Cr_name.toString(),
@@ -300,7 +357,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                                                                             }
                                                                         })
                                                                 }
-                                                            }
+                                                            }*/
                                                         }
 
 
@@ -310,7 +367,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
                                                     }
                                                 })
-                                        }
+                                 //       }
 
 
                                         /*   mHomePresenter.getOrdersFromUser(
@@ -464,7 +521,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                                                                                                                             }
 
                                                                                                                         })*/
-                                    }
+                                 //   }
 
                                  /*   mHomePresenter.getOrdersFromUser(
                                         user?.U_id.toString(),

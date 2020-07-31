@@ -1,6 +1,7 @@
 package com.example.tutorchinese.ui.view.course.course_detail
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +18,17 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.controler.CustomDialog
 import com.example.tutorchinese.ui.controler.NetworkConnectCheck
+import com.example.tutorchinese.ui.controler.PreferencesData
 import com.example.tutorchinese.ui.data.entities.Contents
+import com.example.tutorchinese.ui.data.response.BankDetailsResponse
 import com.example.tutorchinese.ui.data.response.ContentResponse
+import com.example.tutorchinese.ui.data.response.OrdersFromUserResponse
 import com.example.tutorchinese.ui.view.adpater.ContentAdapter
 import com.example.tutorchinese.ui.view.course.add_content.AddContentFragment
 import com.example.tutorchinese.ui.view.course.content_detail.DetailContentFragment
+import com.example.tutorchinese.ui.view.course.course_main.HomePresenter
 import com.example.tutorchinese.ui.view.main.MainActivity
+import com.example.tutorchinese.ui.view.payment.PaymentInformationFragment
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -30,16 +36,19 @@ import java.util.HashMap
 class DetailCourseFragment : Fragment() {
     private lateinit var mDetailCoursePresenter: DetailCoursePresenter
     private lateinit var rvContent: RecyclerView
+    private var user: PreferencesData.Users? = null
 
     private lateinit var mContentAdapter: ContentAdapter
     private var mDialog = CustomDialog()
 
     private var courseId = ""
+    private var status_price = ""
 
     //layout
     private lateinit var layoutNetworkError: ConstraintLayout
     private lateinit var notFoundContent: ConstraintLayout
     private lateinit var btnAddContent: LinearLayout
+    private lateinit var btnPrice: LinearLayout
 
 
     override fun onCreateView(
@@ -59,6 +68,7 @@ class DetailCourseFragment : Fragment() {
 
     private fun initView(root: View) {
         mDetailCoursePresenter = DetailCoursePresenter()
+        user = PreferencesData.user(activity!!)
 
         val tvCourseName: TextView = root.findViewById(R.id.tvCourseName)
         val tvCourseDetails: TextView = root.findViewById(R.id.tvCourseDetails)
@@ -67,6 +77,7 @@ class DetailCourseFragment : Fragment() {
         val btnRefresh: Button = root.findViewById(R.id.btnRefresh)
         notFoundContent = root.findViewById(R.id.not_found_content)
         btnAddContent = root.findViewById(R.id.btnAddContent)
+        btnPrice = root.findViewById(R.id.btnPrice)
 
         rvContent = root.findViewById(R.id.rvContent)
         layoutNetworkError = root.findViewById(R.id.layoutNetworkError2)
@@ -79,6 +90,7 @@ class DetailCourseFragment : Fragment() {
             tvCoursePrice.text = bundle.getString("Cr_price")
 
             courseId = bundle.getString("Cr_id").toString()
+            status_price = bundle.getString("status_price").toString()
         }
 
         swipe.setOnRefreshListener {
@@ -116,6 +128,101 @@ class DetailCourseFragment : Fragment() {
 
         }
 
+        btnPrice.setOnClickListener {
+
+            val bundle = arguments
+            if (bundle != null) {
+
+            mDetailCoursePresenter.getBankDetail(
+                bundle.getString("T_id").toString(),
+                object : DetailCoursePresenter.Response.BankDetail {
+                    override fun value(
+                        bank: BankDetailsResponse
+                    ) {
+
+                        val bundle2 =
+                            Bundle()
+                        bundle2.putString(
+                            "Cr_id",
+                            bundle.getString("Cr_id").toString()
+                        )
+                        bundle2.putString(
+                            "Cr_name",
+                            bundle.getString("Cr_name").toString()
+                        )
+                        bundle2.putString(
+                            "Cr_price",
+                            bundle.getString("Cr_price").toString()
+                        )
+                        bundle2.putString(
+                            "bank_id",
+                            bank.data!![0].bank_id.toString()
+                        )
+                        bundle2.putString(
+                            "T_id",
+                            bank.data[0].T_id.toString()
+                        )
+                        bundle2.putString(
+                            "bank_name",
+                            bank.data[0].bank_name.toString()
+                        )
+                        bundle2.putString(
+                            "bank_number",
+                            bank.data[0].bank_number.toString()
+                        )
+                        bundle2.putString(
+                            "bank_name_account",
+                            bank.data[0].bank_name_account.toString()
+                        )
+                        bundle2.putString(
+                            "bank_qr",
+                            bank.data[0].bank_qr.toString()
+                        )
+
+                        val paymentInformationFragment: PaymentInformationFragment? =
+                            activity!!.fragmentManager
+                                .findFragmentById(
+                                    R.id.fragment_payment_information
+                                ) as PaymentInformationFragment?
+
+                        if (paymentInformationFragment == null) {
+                            val newFragment =
+                                PaymentInformationFragment()
+                            newFragment.arguments =
+                                bundle2
+                            fragmentManager!!.beginTransaction()
+                                .replace(
+                                    R.id.navigation_view,
+                                    newFragment,
+                                    ""
+                                )
+                                .addToBackStack(
+                                    null
+                                )
+                                .commit()
+                        } else {
+                            fragmentManager!!.beginTransaction()
+                                .replace(
+                                    R.id.navigation_view,
+                                    paymentInformationFragment,
+                                    ""
+                                )
+                                .addToBackStack(
+                                    null
+                                )
+                                .commit()
+                        }
+                    }
+
+                    override fun error(
+                        c: String?
+                    ) {
+
+                    }
+                })
+            }
+        }
+
 
         //  startDate = bundle.getString("startDate", startDate)
 
@@ -135,6 +242,68 @@ class DetailCourseFragment : Fragment() {
     }
 
     private fun showContent() {
+        when (user?.type) {
+            "user" -> {
+                when (status_price) {
+                    "ซื้อแล้ว" -> {
+                        btnAddContent.visibility = View.GONE
+                        btnPrice.visibility = View.GONE
+                    }
+                    "กำลังตรวจสอบ" -> {
+                        btnAddContent.visibility = View.GONE
+                        btnPrice.visibility = View.GONE
+                    }
+                    else -> {
+                        btnAddContent.visibility = View.GONE
+                        btnPrice.visibility = View.VISIBLE
+                    }
+                }
+               /* mDetailCoursePresenter.getOrdersFromUser(
+                    user?.U_id.toString(),
+                    hashMap["Co_id"].toString(),
+                    object : DetailCoursePresenter.Response.OrdersUser {
+                        override fun value(c: OrdersFromUserResponse) {
+                            //ซื้อแล้ว
+                            if (c.isSuccessful) {
+                                if (c.data!!.isNotEmpty()) {
+                                    if (c.data[0].O_status == 0) {
+
+                                        btnAddContent.visibility = View.GONE
+                                        btnPrice.visibility = View.GONE
+                                        *//*holder.itemView.setOnClickListener {
+                                            mOnClickList.invoke(myMap, "กำลังตรวจสอบ")
+                                        }*//*
+                                    } else if (c.data[0].O_status == 1) {
+                                        btnAddContent.visibility = View.GONE
+                                        btnPrice.visibility = View.GONE
+
+                                        *//* holder.itemView.setOnClickListener {
+                                             mOnClickList.invoke(myMap, "ซื้อแล้ว")
+                                         }*//*
+                                    }
+                                }
+                                //ยังไม่ซื้อ
+                            } else {
+                                btnAddContent.visibility = View.GONE
+                                btnPrice.visibility = View.VISIBLE
+                            }
+
+                        }
+
+                        override fun error(c: String?) {
+
+                        }
+
+                    })*/
+            }
+            "tutor" -> {
+                btnAddContent.visibility = View.VISIBLE
+                btnPrice.visibility = View.GONE
+            }
+            else -> {
+
+            }
+        }
         if (NetworkConnectCheck().isNetworkConnected(activity!!)) {
             mDetailCoursePresenter.contentData(courseId, object : DetailCoursePresenter.Response {
                 override fun value(c: ContentResponse) {
@@ -151,6 +320,22 @@ class DetailCourseFragment : Fragment() {
                                 ) { hashMap, b ->
                                     // On click
                                     if (b) {
+
+                                        when (user?.type) {
+                                            "user" -> {
+                                                when (status_price) {
+                                                    "ซื้อแล้ว" -> {
+
+                                                    }
+                                                    "กำลังตรวจสอบ" -> {
+                                                        return@ContentAdapter
+                                                    }
+                                                    else -> {
+                                                       return@ContentAdapter
+                                                    }
+                                                }
+                                            }
+                                        }
 
                                         val bundle = Bundle()
                                         bundle.putString("Co_id", hashMap["Co_id"].toString())

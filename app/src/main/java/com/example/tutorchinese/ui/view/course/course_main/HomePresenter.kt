@@ -27,11 +27,11 @@ class HomePresenter {
             fun error(c: String?)
         }
 
+
         interface OrdersUser {
             fun value(c: OrdersFromUserResponse)
             fun error(c: String?)
         }
-
         interface BankDetail {
             fun value(c: BankDetailsResponse)
             fun error(c: String?)

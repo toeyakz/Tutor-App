@@ -43,7 +43,7 @@ class PaymentPresenter {
                         ByteArrayOutputStream()
                     myBitmap.compress(
                         Bitmap.CompressFormat.JPEG,
-                        70,
+                        40,
                         byteArrayOutputStream
                     )
                     val byteArrayImage =

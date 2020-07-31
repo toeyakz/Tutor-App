@@ -273,7 +273,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="โอนจากบัญชีธนาคารเลขที่(4 หลักสุดท้าย)" />
+                                android:text="โอนจากบัญชีธนาคารเลขที่" />
 
                             <EditText
                                 android:id="@+id/edtBankNumber"
@@ -283,7 +283,7 @@
                                 android:background="@drawable/rounded_edittext"
                                 android:drawablePadding="5dp"
                                 android:hint="เลขบัญชี"
-                                android:maxLength="4"
+                                android:maxLength="50"
                                 android:inputType="number"
                                 android:padding="10dp"
                                 android:textSize="14sp" />
