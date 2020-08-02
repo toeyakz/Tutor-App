@@ -2,18 +2,22 @@ package com.example.tutorchinese.ui.view.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.controler.CustomProgressDialog
 import com.example.tutorchinese.ui.controler.PreferencesData
+import com.example.tutorchinese.ui.data.response.CountNotiResponse
 import com.example.tutorchinese.ui.view.bank.BankDetailsFragment
 import com.example.tutorchinese.ui.view.beginner.login.LoginActivity
+import com.example.tutorchinese.ui.view.check_order.CheckOrderFragment
 import com.example.tutorchinese.ui.view.main.MainActivity
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -43,24 +47,46 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private fun initView(root: View) {
         mProfilePresenter = ProfilePresenter()
 
-        // val textView: TextView = root.findViewById(R.id.text_notifications)
+        val tvCountNotification: TextView = root.findViewById(R.id.tvCountNotification)
         val logout: LinearLayout = root.findViewById(R.id.btnLogout)
         val btnBank: LinearLayout = root.findViewById(R.id.btnBank)
         val linearLayout5: LinearLayout = root.findViewById(R.id.linearLayout5)
+        val btnCheckOrder: LinearLayout = root.findViewById(R.id.btnCheckOrder)
 
         logout.setOnClickListener(this)
         btnBank.setOnClickListener(this)
+        btnCheckOrder.setOnClickListener(this)
 
         notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
             // textView.text = it
         })
-        if(user?.type == "user"){
+        if (user?.type == "user") {
             btnBank.visibility = View.GONE
             linearLayout5.visibility = View.GONE
-        }else if(user?.type == "tutor"){
+            btnCheckOrder.visibility = View.GONE
+        } else if (user?.type == "tutor") {
             btnBank.visibility = View.VISIBLE
             linearLayout5.visibility = View.VISIBLE
+            btnCheckOrder.visibility = View.VISIBLE
         }
+
+        mProfilePresenter.getCountNoti(
+            user?.T_id.toString(),
+            object : ProfilePresenter.Response.CountNoti {
+                override fun value(c: CountNotiResponse) {
+
+                    if (c.data!![0].count_noti != "0") {
+                        tvCountNotification.visibility = View.VISIBLE
+                        tvCountNotification.text = c.data[0].count_noti
+                    } else {
+                        tvCountNotification.visibility = View.GONE
+                    }
+                }
+
+                override fun error(c: String?) {
+                    tvCountNotification.visibility = View.GONE
+                }
+            })
 
 
     }
@@ -101,7 +127,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
                 if (detail == null) {
                     val newFragment = BankDetailsFragment()
-                   // newFragment.arguments = bundle
+                    // newFragment.arguments = bundle
                     fragmentManager!!.beginTransaction()
                         .replace(R.id.navigation_view, newFragment, "")
                         .addToBackStack(null)
@@ -113,6 +139,27 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         .commit()
                 }
             }
+
+            R.id.btnCheckOrder -> {
+                val detail: CheckOrderFragment? =
+                    activity!!.fragmentManager
+                        .findFragmentById(R.id.fragment_check_order) as CheckOrderFragment?
+
+                if (detail == null) {
+                    val newFragment = CheckOrderFragment()
+                    // newFragment.arguments = bundle
+                    fragmentManager!!.beginTransaction()
+                        .replace(R.id.navigation_view, newFragment, "")
+                        .addToBackStack(null)
+                        .commit()
+                } else {
+                    fragmentManager!!.beginTransaction()
+                        .replace(R.id.navigation_view, detail, "")
+                        .addToBackStack(null)
+                        .commit()
+                }
+            }
+
         }
     }
 
