@@ -179,6 +179,10 @@ class CustomDialog {
             .setView(mDialogView)
 
         val alertDialog: AlertDialog = mBuilder.create()
+
+        val back = ColorDrawable(Color.TRANSPARENT)
+        val inset = InsetDrawable(back, 50)
+        alertDialog.window?.setBackgroundDrawable(inset)
         alertDialog.show()
 
         Picasso.get().load(src)

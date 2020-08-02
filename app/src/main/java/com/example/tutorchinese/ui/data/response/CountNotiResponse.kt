@@ -9,6 +9,6 @@ data class CountNotiResponse(
     val data: List<Data>?
 )
 
- data class Data(
-     var count_noti: String? = null
- )
+data class Data(
+    var count_noti: String? = null
+)
