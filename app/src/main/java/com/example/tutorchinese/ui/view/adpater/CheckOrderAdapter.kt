@@ -46,13 +46,21 @@ class CheckOrderAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, i: Int) {
 
-        if(item[i].O_status == "1"){
-            holder.imgStatus.setColorFilter(ContextCompat.getColor(context, R.color.colorSubAccent2))
-        }
 
-            holder.tvCourse.text = item[i].Cr_name
-            holder.tvPrice.text = item[i].O_price
-            holder.tvDateTime.text = "วันที่โอนเงิน :" + item[i].O_date + " " + item[i].O_time
+
+        holder.tvCourse.text = item[i].Cr_name
+        holder.tvPrice.text = item[i].O_price
+        holder.tvDateTime.text = "วันที่โอนเงิน :" + item[i].O_date + " " + item[i].O_time
+
+        if (item[i].O_status == "1") {
+            holder.imgStatus.setColorFilter(
+                ContextCompat.getColor(
+                    context,
+                    R.color.colorSubAccent2
+                )
+            )
+            holder.tvCourse.text = item[i].U_name + " " + item[i].U_lastname
+        }
 
 
 

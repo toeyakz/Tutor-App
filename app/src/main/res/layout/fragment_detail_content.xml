@@ -84,13 +84,19 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="รายละเอียด: "/>
+
                             <TextView
                                 android:id="@+id/tvContentDetails"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginEnd="16dp"
-                                android:text="ราคานี้ ถึง 31 ก.ค. เรียนภาษาจีนส่วนตัว ให้บรรลุเป้าหมายอย่างรวดเร็ว e.g เตรียมสอบHSK,ฝึกพูดจีนให้คล่องแคล่ว, ปรับพื้นฐานภาษาจีนที่ถูกต้อง, สอบจีนให้ได้ที่ 1เรียนเดี่ยว 18,500 บาทต่อ 24 ช.ม.เรียนเป็นกลุ่ม เพิ่มท่านละ 2,500 บาท"
+                                android:text="กดที่นี่เพื่อดูรายละเอียด"
                                 android:textColor="#2B2B2B"
                                 android:textSize="16dp" />
                         </LinearLayout>

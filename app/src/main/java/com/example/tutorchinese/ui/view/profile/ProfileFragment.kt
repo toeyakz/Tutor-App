@@ -60,14 +60,22 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
             // textView.text = it
         })
-        if (user?.type == "user") {
-            btnBank.visibility = View.GONE
-            linearLayout5.visibility = View.GONE
-            btnCheckOrder.visibility = View.GONE
-        } else if (user?.type == "tutor") {
-            btnBank.visibility = View.VISIBLE
-            linearLayout5.visibility = View.VISIBLE
-            btnCheckOrder.visibility = View.VISIBLE
+        when (user?.type) {
+            "user" -> {
+                btnBank.visibility = View.GONE
+                linearLayout5.visibility = View.GONE
+                btnCheckOrder.visibility = View.GONE
+            }
+            "tutor" -> {
+                btnBank.visibility = View.VISIBLE
+                linearLayout5.visibility = View.VISIBLE
+                btnCheckOrder.visibility = View.VISIBLE
+            }
+            else -> {
+                btnBank.visibility = View.GONE
+                linearLayout5.visibility = View.GONE
+                btnCheckOrder.visibility = View.GONE
+            }
         }
 
         mProfilePresenter.getCountNoti(

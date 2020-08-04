@@ -301,7 +301,8 @@ class DetailCourseFragment : Fragment() {
                 btnPrice.visibility = View.GONE
             }
             else -> {
-
+                btnAddContent.visibility = View.GONE
+                btnPrice.visibility = View.GONE
             }
         }
         if (NetworkConnectCheck().isNetworkConnected(activity!!)) {

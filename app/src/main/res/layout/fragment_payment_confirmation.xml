@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_payment_confirmation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_payment_confirmation"
     tools:context=".ui.view.payment.PaymentConfirmationFragment">
 
     <ScrollView
@@ -205,23 +205,39 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="โอนจากธนาคาร" />
+                                android:layout_gravity="center_vertical"
+                                android:orientation="vertical">
 
-                            <EditText
-                                android:id="@+id/edtName"
-                                android:layout_width="wrap_content"
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="โอนจากธนาคาร" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@drawable/rounded_edittext"
-                                android:drawablePadding="5dp"
-                                android:hint="กรอกธนาคาร"
-                                android:inputType="textPersonName"
-                                android:padding="10dp"
-                                android:textSize="14sp" />
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/edtName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/rounded_edittext"
+                                    android:drawablePadding="5dp"
+                                    android:hint="กรอกธนาคาร"
+                                    android:inputType="textPersonName"
+                                    android:padding="10dp"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
 
                         </LinearLayout>
 
@@ -237,23 +253,37 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="จำนวนเงินที่โอน" />
+                                android:layout_gravity="center_vertical"
+                                android:orientation="vertical">
 
-                            <EditText
-                                android:id="@+id/edtPriceTotal"
-                                android:layout_width="wrap_content"
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="จำนวนเงินที่โอน" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@drawable/rounded_edittext"
-                                android:drawablePadding="5dp"
-                                android:hint="จำนวนเงิน"
-                                android:inputType="textPersonName"
-                                android:padding="10dp"
-                                android:textSize="14sp" />
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/edtPriceTotal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/rounded_edittext"
+                                    android:drawablePadding="5dp"
+                                    android:hint="จำนวนเงิน"
+                                    android:inputType="textPersonName"
+                                    android:padding="10dp"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -269,24 +299,40 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="โอนจากบัญชีธนาคารเลขที่" />
+                                android:layout_gravity="center_vertical"
+                                android:orientation="vertical">
 
-                            <EditText
-                                android:id="@+id/edtBankNumber"
-                                android:layout_width="wrap_content"
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="โอนจากบัญชีธนาคารเลขที่" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@drawable/rounded_edittext"
-                                android:drawablePadding="5dp"
-                                android:hint="เลขบัญชี"
-                                android:maxLength="50"
-                                android:inputType="number"
-                                android:padding="10dp"
-                                android:textSize="14sp" />
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/edtBankNumber"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/rounded_edittext"
+                                    android:drawablePadding="5dp"
+                                    android:hint="เลขบัญชี"
+                                    android:inputType="number"
+                                    android:maxLength="50"
+                                    android:padding="10dp"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -327,8 +373,6 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
-
 
 
         </LinearLayout>
