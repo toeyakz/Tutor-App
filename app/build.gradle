@@ -75,6 +75,9 @@ dependencies {
     // Dexter Permission Management
     implementation 'com.karumi:dexter:6.0.2'
 
+    implementation 'com.koushikdutta.ion:ion:3.0.8'
+
+
 
 
 

@@ -86,17 +86,59 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/tvContentDetails"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="รายละเอียด: "/>
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
                             <TextView
-                                android:id="@+id/tvContentDetails"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ข้อมูลเพิ่มเติม: "/>
+
+                            <TextView
+                                android:id="@+id/tvContentLink"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginEnd="16dp"
                                 android:text="กดที่นี่เพื่อดูรายละเอียด"
+                                android:textColor="#2B2B2B"
+                                android:textSize="16dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="[ลิงค์]"/>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ไฟล์เนื้อหา: "/>
+
+                            <TextView
+                                android:id="@+id/tvContentFile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="16dp"
+                                android:text="ดาวน์โหลดไฟล์"
                                 android:textColor="#2B2B2B"
                                 android:textSize="16dp" />
                         </LinearLayout>

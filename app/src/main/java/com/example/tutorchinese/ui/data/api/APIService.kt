@@ -5,13 +5,15 @@ import com.example.tutorchinese.ui.data.body.UploadImageEditBank
 import com.example.tutorchinese.ui.data.body.UploadOrderDetailsBody
 import com.example.tutorchinese.ui.data.response.*
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import okhttp3.ResponseBody
+import retrofit2.http.*
+
 
 interface APIService {
+
+
 
     @POST("tutor/service.php?func=updateOrders")
     fun updateOrders(@Body body: RequestBody): Observable<UpdateCourseResponse>
@@ -90,6 +92,10 @@ interface APIService {
 
     @POST("tutor/service.php?func=addCourse")
     fun addCourse(@Body body: RequestBody): Observable<AddCourseResponse>
+
+
+    /*@POST("tutor/service.php?func=addCourse")
+    fun addCourse(@Body body: RequestBody): Observable<AddCourseResponse>*/
 
     @FormUrlEncoded
     @POST("tutor/service.php?func=getCourse")

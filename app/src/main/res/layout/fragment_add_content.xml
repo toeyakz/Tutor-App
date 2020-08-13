@@ -64,7 +64,7 @@
             android:layout_marginTop="8dp"
             android:text="กรอกรายละเอียด :"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtContentName" />
+            app:layout_constraintTop_toBottomOf="@+id/btnCourseFile" />
 
         <TextView
             android:id="@+id/tvCourseDetails"
@@ -132,6 +132,72 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCourseDetails" />
+
+
+        <TextView
+            android:id="@+id/tvCourseLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="กรอกลิงค์ข้อมูล :"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtContentName" />
+
+        <EditText
+            android:id="@+id/edtCourseLink"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/rounded_edittext"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:hint="แนบลิงค์"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCourseLink" />
+
+        <TextView
+            android:id="@+id/tvCourseLink2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="แนบไฟล์ :"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtCourseLink" />
+
+        <Button
+        android:id="@+id/btnCourseFile"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="14dp"
+        android:text="เลือกไฟล์"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCourseLink2" />
+
+        <TextView
+            android:id="@+id/tvFileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="ชื่อไฟล์"
+            app:layout_constraintBottom_toBottomOf="@+id/btnCourseFile"
+            app:layout_constraintStart_toEndOf="@+id/btnCourseFile"
+            app:layout_constraintTop_toTopOf="@+id/btnCourseFile" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

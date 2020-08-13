@@ -1,7 +1,13 @@
 package com.example.tutorchinese.ui.view.course.course_detail
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.InsetDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +16,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,15 +29,14 @@ import com.example.tutorchinese.ui.controler.PreferencesData
 import com.example.tutorchinese.ui.data.entities.Contents
 import com.example.tutorchinese.ui.data.response.BankDetailsResponse
 import com.example.tutorchinese.ui.data.response.ContentResponse
-import com.example.tutorchinese.ui.data.response.OrdersFromUserResponse
 import com.example.tutorchinese.ui.view.adpater.ContentAdapter
 import com.example.tutorchinese.ui.view.course.add_content.AddContentFragment
 import com.example.tutorchinese.ui.view.course.content_detail.DetailContentFragment
-import com.example.tutorchinese.ui.view.course.course_main.HomePresenter
 import com.example.tutorchinese.ui.view.main.MainActivity
 import com.example.tutorchinese.ui.view.payment.PaymentInformationFragment
-import java.util.ArrayList
-import java.util.HashMap
+import kotlinx.android.synthetic.main.dialog_edit_course.view.*
+import java.io.File
+import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class DetailCourseFragment : Fragment() {
@@ -43,6 +49,17 @@ class DetailCourseFragment : Fragment() {
 
     private var courseId = ""
     private var status_price = ""
+
+    private var fileUri: Uri? = null
+    private var filePath: String? = null
+    var tempFile : File? = null
+
+    private val FILE_SELECT_CODE = 1012
+   // var mDialogViewc = LayoutInflater.from(activity)
+
+    var mDialogView: View? = null
+    //val mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog_edit_course, null)
+
 
     //layout
     private lateinit var layoutNetworkError: ConstraintLayout
@@ -241,6 +258,110 @@ class DetailCourseFragment : Fragment() {
         }
     }
 
+    fun dialogEditContent(
+        context: Context,
+        title: String,
+        myMap2: HashMap<String, String>,
+        callBack: (HashMap<String, String>) -> Unit
+    ) {
+
+       // val mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog_edit_course, null)
+
+        val inflater = this.layoutInflater
+        mDialogView = inflater.inflate(R.layout.dialog_edit_course, null)
+
+       // val mDialogView = mDialogViewc.inflate(R.layout.dialog_edit_course, null)
+        val mBuilder = AlertDialog.Builder(context)
+            .setView(mDialogView)
+
+        val alertDialog: AlertDialog = mBuilder.create()
+        alertDialog.setCancelable(false)
+
+        //setDetail
+        mDialogView!!.textView7.text = "แก้ไขลำดับบทเรียน :"
+        mDialogView!!.edtCourseName.hint = "ลำดับบทเรียน"
+        mDialogView!!.tvCourseDetails.text = "แก้ไขชื่อบทเรียน :"
+        mDialogView!!.edtCoursePrice.hint = "ชื่อบทเรียน :"
+
+        // set title
+        mDialogView!!.tvTitle.text = title
+
+        //set data
+        mDialogView!!.edtCourseName.setText(myMap2["Co_chapter_number"])
+        mDialogView!!.edtCoursePrice.setText(myMap2["Co_name"])
+        mDialogView!!.edtCourseDetail.setText(myMap2["Co_info"])
+        mDialogView!!.edtCourseLink.setText(myMap2["Co_link"])
+        mDialogView!!.tvFileName.text = myMap2["Co_file"]
+
+
+        val back = ColorDrawable(Color.TRANSPARENT)
+        val inset = InsetDrawable(back, 50)
+        alertDialog.window?.setBackgroundDrawable(inset)
+
+        mDialogView!!.edtCourseName
+        alertDialog.show()
+
+        mDialogView!!.btnCourseFile.setOnClickListener {
+            chooseFile()
+            if(tempFile != null){
+
+            }
+        }
+
+        mDialogView!!.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        //กดปุ่่มยืนยัน
+        mDialogView!!.btnConfirm.setOnClickListener {
+            val myMap = HashMap<String, String>()
+            myMap["Co_id"] = myMap2["Co_id"].toString()
+            myMap["Co_chapter_number"] = mDialogView!!.edtCourseName.text.toString()
+            myMap["Co_name"] = mDialogView!!.edtCoursePrice.text.toString()
+            myMap["Co_info"] = mDialogView!!.edtCourseDetail.text.toString()
+            myMap["Co_file"] = tempFile!!.name
+            myMap["Co_link"] = mDialogView!!.edtCourseLink.text.toString()
+            callBack.invoke(myMap)
+
+            alertDialog.dismiss()
+
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            FILE_SELECT_CODE -> if (resultCode === -1) {
+                fileUri = data!!.data
+                filePath = fileUri?.path
+                /*  tvFileName?.text = filePath*/
+                tempFile = File(fileUri?.path)
+                mDialogView!!.tvFileName.text = tempFile!!.name
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+
+    }
+
+    private fun chooseFile() {
+
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*"
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+
+        try {
+            startActivityForResult(
+                Intent.createChooser(intent, "เลือกไฟล์"),
+                FILE_SELECT_CODE
+            )
+        } catch (ex: ActivityNotFoundException) {
+            // Potentially direct the user to the Market with a Dialog
+            Toast.makeText(
+                activity, "กรุณาติดตั้ง File Manager..",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
     private fun showContent() {
         when (user?.type) {
             "user" -> {
@@ -342,11 +463,13 @@ class DetailCourseFragment : Fragment() {
                                         bundle.putString("Co_id", hashMap["Co_id"].toString())
                                         bundle.putString("Cr_id", hashMap["Cr_id"].toString())
                                         bundle.putString("Co_name", hashMap["Co_name"].toString())
-                                        bundle.putString("Cr_info", hashMap["Co_info"].toString())
+                                        bundle.putString("Co_info", hashMap["Co_info"].toString())
                                         bundle.putString(
                                             "Co_chapter_number",
                                             hashMap["Co_chapter_number"].toString()
                                         )
+                                        bundle.putString("Co_file", hashMap["Co_file"].toString())
+                                        bundle.putString("Co_link", hashMap["Co_link"].toString())
 
                                         val detail: DetailContentFragment? =
                                             activity!!.fragmentManager
@@ -377,16 +500,20 @@ class DetailCourseFragment : Fragment() {
                                                 myMap2["Cr_id"] = hashMap["Cr_id"].toString()
                                                 myMap2["Co_name"] = hashMap["Co_name"].toString()
                                                 myMap2["Co_info"] = hashMap["Co_info"].toString()
+                                                myMap2["myMap2"] = hashMap["myMap2"].toString()
+                                                myMap2["Co_link"] = hashMap["Co_link"].toString()
+                                                myMap2["Co_file"] = hashMap["Co_file"].toString()
                                                 myMap2["Co_chapter_number"] =
                                                     hashMap["Co_chapter_number"].toString()
 
-                                                mDialog.dialogEditContent(
+                                                dialogEditContent(
                                                     activity!!,
                                                     "แก้ไขข้อมูล",
                                                     myMap2
                                                 ) { h ->
                                                     mDetailCoursePresenter.updateCourse(
                                                         courseId,
+                                                        tempFile!!,
                                                         h
                                                     ) { b, s ->
                                                         if (b) {

@@ -1,6 +1,8 @@
 package com.example.tutorchinese.ui.view.course.course_detail
 
 import android.annotation.SuppressLint
+import android.util.Base64
+import android.util.Base64OutputStream
 import android.util.Log
 import com.example.tutorchinese.ui.data.api.DataModule
 import com.example.tutorchinese.ui.data.response.*
@@ -12,6 +14,7 @@ import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.*
 import java.util.concurrent.TimeUnit
 
 
@@ -69,10 +72,34 @@ class DetailCoursePresenter {
             })
     }
 
+    private fun fileToBase64(file: File): String {
+        var inputStream: InputStream? = null //You can get an inputStream using any IO API
+
+        inputStream = FileInputStream(file.absolutePath)
+        val buffer = ByteArray(8192)
+        var bytesRead: Int
+        val output = ByteArrayOutputStream()
+        val output64 =
+            Base64OutputStream(output, Base64.DEFAULT)
+        try {
+            while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+                output64.write(buffer, 0, bytesRead)
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        output64.close()
+
+        return output.toString()
+    }
 
     @SuppressLint("CheckResult")
-    fun updateCourse(course_id: String, h: HashMap<String, String>, function: (Boolean, String) -> Unit) {
+    fun updateCourse(course_id: String, file: File, h: HashMap<String, String>, function: (Boolean, String) -> Unit) {
         try {
+
+            val surname: String = file.path.substring(file.path.lastIndexOf(".") + 1)
+            val base64 = fileToBase64(file)
+
 
             val conTactArray = JSONArray()
             val root = JSONObject()
@@ -84,6 +111,13 @@ class DetailCoursePresenter {
             contact.put("content_detail", h["Co_info"])
             contact.put("content_name", h["Co_name"])
             contact.put("content_number", h["Co_chapter_number"])
+
+            contact.put("content_link", h["Co_link"])
+
+            //file
+            contact.put("surname", surname)
+            contact.put("base64", base64)
+            contact.put("file_name", file.name)
 
             conTactArray.put(0, contact)
             root.put("data", conTactArray)

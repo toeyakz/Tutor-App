@@ -62,6 +62,7 @@ class CheckOrderConfirmFragment : Fragment() {
         }
     }
 
+
     private fun contentView() {
         mCheckOrderPresenter = CheckOrderPresenter()
         user = PreferencesData.user(activity!!)
@@ -79,7 +80,6 @@ class CheckOrderConfirmFragment : Fragment() {
                             if (i.O_status == "1") {
                                 lists.add(i)
                             }
-
                         }
                         mCheckOrderAdapter =
                             CheckOrderAdapter(activity!!, lists){hashMap, b ->

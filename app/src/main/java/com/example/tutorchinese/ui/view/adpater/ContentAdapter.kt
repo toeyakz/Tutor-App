@@ -2,6 +2,7 @@ package com.example.tutorchinese.ui.view.adpater
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnLongClickListener
@@ -46,6 +47,8 @@ class ContentAdapter(
         holder.tvNameContent.text = item[i].Co_name
         holder.tvChapterContent.text = item[i].Co_chapter_number.toString()
 
+        Log.d("As5dasd", item[i].Co_file.toString())
+
         holder.itemView.setOnClickListener {
             val myMap = HashMap<String, String>()
             myMap["Co_id"] = item[i].Co_id.toString()
@@ -53,6 +56,8 @@ class ContentAdapter(
             myMap["Co_name"] = item[i].Co_name.toString()
             myMap["Co_info"] = item[i].Co_info.toString()
             myMap["Co_chapter_number"] = item[i].Co_chapter_number.toString()
+            myMap["Co_file"] = item[i].Co_file.toString()
+            myMap["Co_link"] = item[i].Co_link.toString()
             mOnClickList.invoke(myMap, true)
         }
 
@@ -63,6 +68,8 @@ class ContentAdapter(
             myMap["Co_name"] = item[i].Co_name.toString()
             myMap["Co_info"] = item[i].Co_info.toString()
             myMap["Co_chapter_number"] = item[i].Co_chapter_number.toString()
+            myMap["Co_file"] = item[i].Co_file.toString()
+            myMap["Co_link"] = item[i].Co_link.toString()
             mOnClickList.invoke(myMap, false)
             true
         }
