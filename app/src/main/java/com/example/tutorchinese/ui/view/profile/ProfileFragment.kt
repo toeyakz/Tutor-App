@@ -20,7 +20,7 @@ import com.example.tutorchinese.ui.view.beginner.login.LoginActivity
 import com.example.tutorchinese.ui.view.check_order.CheckOrderFragment
 import com.example.tutorchinese.ui.view.main.MainActivity
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "DEPRECATION")
 class ProfileFragment : Fragment(), View.OnClickListener {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
@@ -52,10 +52,13 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         val btnBank: LinearLayout = root.findViewById(R.id.btnBank)
         val linearLayout5: LinearLayout = root.findViewById(R.id.linearLayout5)
         val btnCheckOrder: LinearLayout = root.findViewById(R.id.btnCheckOrder)
+        val btnTutorAndUser: LinearLayout = root.findViewById(R.id.btnTutorAndUser)
+        val linearLayout6: LinearLayout = root.findViewById(R.id.linearLayout6)
 
         logout.setOnClickListener(this)
         btnBank.setOnClickListener(this)
         btnCheckOrder.setOnClickListener(this)
+        btnTutorAndUser.setOnClickListener(this)
 
         notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
             // textView.text = it
@@ -65,16 +68,22 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 btnBank.visibility = View.GONE
                 linearLayout5.visibility = View.GONE
                 btnCheckOrder.visibility = View.GONE
+                btnTutorAndUser.visibility = View.GONE
+                linearLayout6.visibility = View.GONE
             }
             "tutor" -> {
                 btnBank.visibility = View.VISIBLE
                 linearLayout5.visibility = View.VISIBLE
                 btnCheckOrder.visibility = View.VISIBLE
+                btnTutorAndUser.visibility = View.GONE
+                linearLayout6.visibility = View.GONE
             }
             else -> {
                 btnBank.visibility = View.GONE
                 linearLayout5.visibility = View.GONE
                 btnCheckOrder.visibility = View.GONE
+                btnTutorAndUser.visibility = View.VISIBLE
+                linearLayout6.visibility = View.VISIBLE
             }
         }
 
@@ -155,6 +164,25 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
                 if (detail == null) {
                     val newFragment = CheckOrderFragment()
+                    // newFragment.arguments = bundle
+                    fragmentManager!!.beginTransaction()
+                        .replace(R.id.navigation_view, newFragment, "")
+                        .addToBackStack(null)
+                        .commit()
+                } else {
+                    fragmentManager!!.beginTransaction()
+                        .replace(R.id.navigation_view, detail, "")
+                        .addToBackStack(null)
+                        .commit()
+                }
+            }
+            R.id.btnTutorAndUser -> {
+                val detail: TutorAndUserFragment? =
+                    activity!!.fragmentManager
+                        .findFragmentById(R.id.fragment_tutor_and_user) as TutorAndUserFragment?
+
+                if (detail == null) {
+                    val newFragment = TutorAndUserFragment()
                     // newFragment.arguments = bundle
                     fragmentManager!!.beginTransaction()
                         .replace(R.id.navigation_view, newFragment, "")

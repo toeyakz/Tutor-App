@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import com.example.tutorchinese.R
 import com.example.tutorchinese.ui.controler.Constants.Companion.HOME
 import com.example.tutorchinese.ui.controler.Constants.Companion.PROFILE
+import com.example.tutorchinese.ui.controler.PreferencesData
 import com.example.tutorchinese.ui.view.course.course_main.HomeFragment
 import com.example.tutorchinese.ui.view.dashboard.DashboardFragment
 import com.example.tutorchinese.ui.view.profile.ProfileFragment
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.custom_toolbar.*
 import java.util.*
 
 
-@Suppress("DEPRECATION", "DEPRECATED_IDENTITY_EQUALS")
+@Suppress("DEPRECATION", "DEPRECATED_IDENTITY_EQUALS", "UNREACHABLE_CODE")
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private val SELECTED_ITEM = "arg_selected_item"
     private var homeFragment: HomeFragment? = null
@@ -30,10 +31,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private var navView: BottomNavigationView? = null
     private var mSelectedItem = 0
 
+    private var user: PreferencesData.Users? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        user = PreferencesData.user(applicationContext!!)
         //val navView: BottomNavigationView = findViewById(R.id.nav_view)
         //val navController = findNavController(R.id.nav_host_fragment)
         //   navView.setupWithNavController(navController)
@@ -100,7 +104,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
 
         if (!isFragmentPopped && supportFragmentManager.backStackEntryCount == 2) {
-           // navView!!.selectedItemId = R.id.navigation_home
+            // navView!!.selectedItemId = R.id.navigation_home
         } else if (!isFragmentPopped && supportFragmentManager.backStackEntryCount <= 1) {
             finish()
         } else if (!isFragmentPopped) {
@@ -129,6 +133,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
         return false
     }
+
 
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {

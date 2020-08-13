@@ -14,6 +14,11 @@ import retrofit2.http.*
 interface APIService {
 
 
+    @POST("tutor/service.php?func=getUserOnly")
+    fun getUserOnly(): Observable<UserOnlyResponse>
+
+    @POST("tutor/service.php?func=getTutorOnly")
+    fun getTutorOnly(): Observable<TutorOnlyResponse>
 
     @POST("tutor/service.php?func=updateOrders")
     fun updateOrders(@Body body: RequestBody): Observable<UpdateCourseResponse>

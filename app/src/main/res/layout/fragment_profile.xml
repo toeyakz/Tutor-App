@@ -104,7 +104,7 @@
             app:layout_constraintTop_toBottomOf="@+id/btnCheckOrder" />
 
         <LinearLayout
-            android:id="@+id/linearLayout4"
+            android:id="@+id/btnTutorAndUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
-                android:text="ข้อมูลผู้ใช้"
+                android:text="ติวเตอร์และผู้ใช้งาน"
                 android:textStyle="bold" />
 
 
@@ -141,7 +141,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+            app:layout_constraintTop_toBottomOf="@+id/btnTutorAndUser" />
 
 
         <LinearLayout
@@ -156,7 +156,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+            app:layout_constraintTop_toBottomOf="@+id/btnTutorAndUser">
 
             <ImageView
                 android:layout_width="32dp"

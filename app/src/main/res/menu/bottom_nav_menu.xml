@@ -6,14 +6,10 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="คอร์ส" />
 
-<!--    <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />-->
 
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_person_black_24dp"
+        android:icon="@drawable/ic_baseline_more_horiz_24"
         android:title="อื่นๆ" />
 
 </menu>
